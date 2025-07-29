@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  inventory-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: inventory-service
+    ports:
+      - "8194:8194"
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - DB_URL=jdbc:mysql://mysql:3306/mms_inventory_db
+      - DB_USERNAME=root
+      - DB_PASSWORD=mysql
+      - KEYCLOAK_SERVER_URL=http://keycloak:8080
+      - KEYCLOAK_REALM=saas-erp
+    depends_on:
+      - mysql
+      - keycloak
+
+  mysql:
+    image: mysql:8.0
+    container_name: inv_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: startup_db
+      MYSQL_ROOT_PASSWORD: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.1
+    container_name: keycloak
+    command: start-dev
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: mysql
+      KC_DB_URL: jdbc:mysql://mysql:3306/keycloak
+      KC_DB_USERNAME: root
+      KC_DB_PASSWORD: mysql
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
