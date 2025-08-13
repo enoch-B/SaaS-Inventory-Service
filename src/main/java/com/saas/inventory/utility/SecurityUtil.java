@@ -13,9 +13,14 @@ public class SecurityUtil {
         return (Jwt) authentication.getPrincipal();
     }
 
+
+
     public String getUserToken() {
         return String.format("Bearer %s", getUserJwt().getTokenValue());
     }
+
+
+
 
     public String getUserId() {
 
