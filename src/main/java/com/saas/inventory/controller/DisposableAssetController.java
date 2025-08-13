@@ -42,7 +42,7 @@ public class DisposableAssetController {
             @Parameter(description = "Tenant ID", required = true) @PathVariable UUID tenantId,
             @Valid @RequestBody DisposableAssetRequest disposableAssetRequest) throws IOException {
 
-         permissionEvaluator.addDisposalCollectionPermission(tenantId);
+//         permissionEvaluator.addDisposalCollectionPermission(tenantId);
 
         DisposableAssetResponse response = disposableAssetService.addDisposalCollection(tenantId, disposableAssetRequest);
         return new  ResponseEntity<>(response, HttpStatus.CREATED);
@@ -53,7 +53,7 @@ public class DisposableAssetController {
             @Parameter(description = "Tenant ID", required = true) @PathVariable UUID tenantId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
-        permissionEvaluator.getAllDisposalCollectionPermission(tenantId);
+//        permissionEvaluator.getAllDisposalCollectionPermission(tenantId);
         Page<DisposableAssetResponse> response = disposableAssetService.getAllDisposalCollection(tenantId, page, size);
         return ResponseEntity.ok(response);
     }

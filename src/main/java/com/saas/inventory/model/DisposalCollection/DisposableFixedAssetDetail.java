@@ -20,8 +20,6 @@ public class DisposableFixedAssetDetail {
     private DisposableAsset disposableAsset;
 
     private UUID itemId; // From item-service
-    private String tagNumber; //unique identifier for the asset
-
 
     private String description;
     private Integer quantity;

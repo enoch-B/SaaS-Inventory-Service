@@ -27,24 +27,24 @@ public class DisposableAssetMapper {
     throws IOException {
         DisposableAsset disposableAsset = new DisposableAsset();
 
-        DepartmentDto department=validationUtil.getDepartmentById(tenantId,request.getDepartmentId());
-        StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
+//        DepartmentDto department=validationUtil.getDepartmentById(tenantId,request.getDepartmentId());
+//        StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
 
         disposableAsset.setTenantId(tenantId);
         disposableAsset.setDisposableType(request.getDisposableType());
         disposableAsset.setDisposalStatus(request.getDisposalStatus());
         disposableAsset.setDrNo(request.getDrNo());
-        disposableAsset.setDepartmentId(department.getId());
-        disposableAsset.setStoreId(store.getId());
+        disposableAsset.setDepartmentId(request.getDepartmentId());
+        disposableAsset.setStoreId(request.getStoreId());
         disposableAsset.setRequisitionDate(request.getRequisitionDate());
 
         if (request.getDisposableFixedAssetDetails() != null) {
             List<DisposableFixedAssetDetail> details = request.getDisposableFixedAssetDetails().stream().map(detailRequest -> {
                 DisposableFixedAssetDetail detail = new DisposableFixedAssetDetail();
 
-                FixedAssetDto asset=validationUtil.getItemById(tenantId,detailRequest.getItemId());
+//                FixedAssetDto asset=validationUtil.getItemById(tenantId,detailRequest.getItemId());
 
-                detail.setItemId(asset.getId());
+                detail.setItemId(detailRequest.getItemId());
                 detail.setBatchNo(detailRequest.getBatchNo());
                 detail.setDescription(detailRequest.getDescription());
                 detail.setExpirationDate(detailRequest.getExpirationDate());
