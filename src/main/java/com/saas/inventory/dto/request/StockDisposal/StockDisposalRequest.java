@@ -11,17 +11,15 @@ import java.util.UUID;
 @Data
 public class StockDisposalRequest {
 
-    @NotNull(message = "Tenant ID is required")
-    private UUID tenantId;
 
     @NotNull(message = "Store ID is required")
     private UUID storeId;
 
 
-    @NotBlank(message = "Disposal number is required")
+    @NotNull(message = "Disposal number is required")
     private String disposalNo;
 
-    @NotBlank(message = "Disposal status is required")
+    @NotNull(message = "Disposal status is required")
     private String disposalStatus;
 
     @NotNull(message = "Propose date is required")
@@ -31,10 +29,10 @@ public class StockDisposalRequest {
     private LocalDate approvedDate;
 
 
-    @NotBlank(message = "File name is required")
+    @NotNull(message = "File name is required")
     private String fileName;
 
-    @NotBlank(message = "File type is required")
+    @NotNull(message = "File type is required")
     private String fileType;
 
     @NotNull(message = "File data is required")
