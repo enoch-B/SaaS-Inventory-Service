@@ -63,7 +63,7 @@ public class DisposableAssetController {
             @Parameter(description = "Tenant ID", required = true) @PathVariable UUID tenantId,
             @Parameter(description = "Disposable Asset ID", required = true) @PathVariable UUID id) {
 
-        permissionEvaluator.getDisposalCollectionByIdPermission(tenantId);
+//        permissionEvaluator.getDisposalCollectionByIdPermission(tenantId);
         DisposableAssetResponse response = disposableAssetService.getDisposalCollectionById(tenantId, id);
         return ResponseEntity.ok(response);
     }
@@ -81,7 +81,7 @@ public class DisposableAssetController {
     public ResponseEntity<String> deleteDisposableAsset(
             @Parameter(description = "Tenant ID", required = true) @PathVariable UUID tenantId,
             @Parameter(description = "Disposable Asset ID", required = true) @PathVariable UUID id) {
-        permissionEvaluator.deleteDisposalCollectionPermission(tenantId);
+//        permissionEvaluator.deleteDisposalCollectionPermission(tenantId);
         disposableAssetService.deleteDisposableAsset(tenantId, id);
         return ResponseEntity.ok("Deleted Successfully");
     }
@@ -92,7 +92,7 @@ public class DisposableAssetController {
             @Parameter(description = "Disposable Asset ID", required = true) @PathVariable UUID id,
             @Valid @RequestBody DisposableAssetRequest disposableAssetRequest) {
 
-        permissionEvaluator.updateDisposalCollectionPermission(tenantId);
+//        permissionEvaluator.updateDisposalCollectionPermission(tenantId);
         DisposableAssetResponse response = disposableAssetService.updateDisposableAsset(tenantId, id, disposableAssetRequest);
         return ResponseEntity.ok(response);
     }

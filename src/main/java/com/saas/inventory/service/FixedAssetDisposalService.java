@@ -51,9 +51,9 @@ public class FixedAssetDisposalService {
         return String.format("FixedAssetDisposalNO-%03d/%d", nextNumber, currentYear);
     }
 
-    public FixedAssetDisposalResponse addFixedAssetDisposal(UUID tenantId, FixedAssetDisposalRequest request, MultipartFile file,DisposableAsset disposableAsset) throws IOException {
+    public FixedAssetDisposalResponse addFixedAssetDisposal(UUID tenantId, FixedAssetDisposalRequest request, MultipartFile file) throws IOException {
 
-        FixedAssetDisposal entity = fixedAssetDisposalMapper.toEntity(tenantId, request, file, disposableAsset);
+        FixedAssetDisposal entity = fixedAssetDisposalMapper.toEntity(tenantId, request, file);
 
         FixedAssetDisposal savedEntity = fixedAssetDisposalRepository.save(entity);
 

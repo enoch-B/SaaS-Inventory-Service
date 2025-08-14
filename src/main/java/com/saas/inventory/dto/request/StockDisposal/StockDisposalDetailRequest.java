@@ -1,6 +1,9 @@
 package com.saas.inventory.dto.request.StockDisposal;
 
 
+import com.saas.inventory.enums.DisposalMethod;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
@@ -14,8 +17,9 @@ public class StockDisposalDetailRequest {
     @NotNull(message = "Item ID is required")
     private UUID itemId;
 
-    @NotBlank(message = "Disposal method is required")
-    private String disposalMethod;
+    @NotNull(message = "Disposal method is required")
+    @Enumerated(EnumType.STRING)
+    private DisposalMethod disposalMethod;
 
     @NotBlank(message = "Description is required")
     private String description;

@@ -164,6 +164,9 @@ public class PermissionEvaluator {
     public void updateFixedAssetTransferPermission(UUID tenantId) {
         checkPermission(tenantId,ResourceName.UPDATE_FIXED_ASSET_TRANSFER);
     }
+    public void deleteFixedAssetTransferPermission(UUID tenantId) {
+        checkPermission(tenantId, ResourceName.DELETE_FIXED_ASSET_TRANSFER);
+    }
 
     /*
       Inventory Count Permission
@@ -290,6 +293,7 @@ public class PermissionEvaluator {
     public void deleteStockDisposalPermission(UUID tenantId) {
         checkPermission(tenantId, ResourceName.DELETE_STOCK_DISPOSAL);
     }
+
 
 
 }

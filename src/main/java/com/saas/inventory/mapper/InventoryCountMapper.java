@@ -1,22 +1,39 @@
 package com.saas.inventory.mapper;
 
+import com.saas.inventory.dto.clientDto.BudgetDto;
+import com.saas.inventory.dto.clientDto.FixedAssetDto;
+import com.saas.inventory.dto.clientDto.StoreDto;
 import com.saas.inventory.dto.request.InventoryCount.InventoryCountRequest;
 import com.saas.inventory.dto.response.InventoryCount.InventoryCountDetailResponse;
 import com.saas.inventory.dto.response.InventoryCount.InventoryCountResponse;
 import com.saas.inventory.model.InventoryCountSheet.InventoryCount;
 import com.saas.inventory.model.InventoryCountSheet.InventoryDetail;
+import com.saas.inventory.utility.ValidationUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class InventoryCountMapper {
+
+    private final ValidationUtil validationUtil;
 
 
     public InventoryCount toEntity(UUID tenantId, InventoryCountRequest request){
+
+
         InventoryCount inventoryCount = new InventoryCount();
+
+//        StoreDto storeDto=validationUtil.getStoreById(tenantId,request.getStoreId());
+//        BudgetDto budgetDto=validationUtil.getBudgetById(tenantId, request.getBudgetYearId());
+
+
+
         inventoryCount.setTenantId(tenantId);
         inventoryCount.setStoreId(request.getStoreId());
         inventoryCount.setInventoryCountNumber(request.getInventoryCountNumber());
@@ -29,6 +46,8 @@ public class InventoryCountMapper {
         if (request.getInventoryItems() != null) {
             List<InventoryDetail> details = request.getInventoryItems().stream().map(itemRequest -> {
                 InventoryDetail inventoryDetail = new InventoryDetail();
+//                FixedAssetDto fixedAssetDto = validationUtil.getItemById(tenantId, itemRequest.getItemId());
+
                 inventoryDetail.setItemId(itemRequest.getItemId());
                 inventoryDetail.setQuantity(itemRequest.getQuantity());
                 inventoryDetail.setRemark(itemRequest.getRemark());
@@ -73,8 +92,10 @@ public class InventoryCountMapper {
     }
 
 
-    public InventoryCount mapUpdateRequest(InventoryCount inventoryCount,
+    public InventoryCount mapUpdateRequest(UUID tenantId,InventoryCount inventoryCount,
                                            InventoryCountRequest request) {
+
+//        StoreDto storeDto=validationUtil.getStoreById(tenantId, request.getStoreId());
 
         if (request.getStoreId() != null) {
             inventoryCount.setStoreId(request.getStoreId());
@@ -108,6 +129,8 @@ public class InventoryCountMapper {
             List<InventoryDetail> details = request.getInventoryItems().stream()
                     .map(itemRequest -> {
                         InventoryDetail detail = new InventoryDetail();
+
+//                        FixedAssetDto fixedAssetDto = validationUtil.getItemById(tenantId, itemRequest.getItemId());
                         detail.setItemId(itemRequest.getItemId());
                         detail.setQuantity(itemRequest.getQuantity());
                         detail.setRemark(itemRequest.getRemark());

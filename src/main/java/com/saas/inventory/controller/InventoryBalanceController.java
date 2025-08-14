@@ -30,7 +30,7 @@ public class InventoryBalanceController {
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @RequestBody @Valid InventoryBalanceRequest inventoryBalanceRequest) {
 
-      permissionEvaluator.addInventoryBalancePermission(tenantId);
+//      permissionEvaluator.addInventoryBalancePermission(tenantId);
         InventoryBalanceResponse response = inventoryBalanceService.createInventoryBalance(tenantId, inventoryBalanceRequest);
         return ResponseEntity.ok(response);
     }
@@ -40,7 +40,7 @@ public class InventoryBalanceController {
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Page number (default = 0)") @RequestParam(defaultValue = "0") int page,
             @Parameter(description = "Page size (default = 10)") @RequestParam(defaultValue = "10") int size) {
-         permissionEvaluator.getAllInventoryBalancePermission(tenantId);
+//         permissionEvaluator.getAllInventoryBalancePermission(tenantId);
 
         Page<InventoryBalanceResponse> response = inventoryBalanceService.getAllInventoryBalance(tenantId, page, size);
         return ResponseEntity.ok(response);
@@ -50,7 +50,7 @@ public class InventoryBalanceController {
     public ResponseEntity<?> getInventoryBalanceById(
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Inventory Balance ID") @PathVariable UUID id) {
-        permissionEvaluator.getInventoryBalanceByIdPermission(tenantId);
+//        permissionEvaluator.getInventoryBalanceByIdPermission(tenantId);
         InventoryBalanceResponse response = inventoryBalanceService.getInventoryBalanceById(tenantId, id);
         return ResponseEntity.ok(response);
     }
@@ -60,7 +60,7 @@ public class InventoryBalanceController {
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Inventory Balance ID") @PathVariable UUID id) {
 
-        permissionEvaluator.deleteInventoryBalancePermission(tenantId);
+//        permissionEvaluator.deleteInventoryBalancePermission(tenantId);
 
         inventoryBalanceService.deleteInventoryBalance(tenantId, id);
         return ResponseEntity.ok("Deleted Successfully");
@@ -68,7 +68,7 @@ public class InventoryBalanceController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<?>updateInventoryBalance(@PathVariable UUID tenantId, @PathVariable UUID id, @RequestBody InventoryBalanceRequest request, @RequestBody InventoryCount count) throws IOException{
-        permissionEvaluator.updateInventoryBalancePermission(tenantId);
+//        permissionEvaluator.updateInventoryBalancePermission(tenantId);
 
         InventoryBalanceResponse response=inventoryBalanceService.updateInventoryBalance(tenantId,id,request,count);
 

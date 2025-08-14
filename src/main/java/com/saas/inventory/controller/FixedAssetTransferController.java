@@ -45,7 +45,7 @@ public class FixedAssetTransferController {
     public ResponseEntity<?> addFixedAssetTransfer(
             @PathVariable UUID tenantId,
             @RequestBody @Valid FixedAssetTransferRequest request) {
-        permissionEvaluator.addFixedAssetTransfer(tenantId);
+//        permissionEvaluator.addFixedAssetTransfer(tenantId);
         FixedAssetTransferResponse response = fixedAssetTransferService.addFixedAssetTransfer(tenantId, request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
 
@@ -58,7 +58,7 @@ public class FixedAssetTransferController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
 
-        permissionEvaluator.getAllFixedAssetTransferPermission(tenantId);
+//        permissionEvaluator.getAllFixedAssetTransferPermission(tenantId);
 
         Page<FixedAssetTransferResponse> response=fixedAssetTransferService.getAllFixedAssetTransfer(tenantId, page, size);
 
@@ -70,7 +70,7 @@ public class FixedAssetTransferController {
             @PathVariable UUID tenantId,
             @PathVariable String transferNumber) {
 
-        permissionEvaluator.getAllFixedAssetTransferByTransferNoPermission(tenantId);
+//        permissionEvaluator.getAllFixedAssetTransferByTransferNoPermission(tenantId);
 
         FixedAssetTransferResponse response= fixedAssetTransferService.getFixedAssetTransferByTransferNumber(tenantId, transferNumber);
         return ResponseEntity.ok(response);
@@ -81,7 +81,7 @@ public class FixedAssetTransferController {
     public ResponseEntity<?> getFixedAssetTransferById(
             @PathVariable UUID tenantId,
             @PathVariable UUID id) {
-        permissionEvaluator.getFixedAssetTransferByIdPermission(tenantId,id);
+//        permissionEvaluator.getFixedAssetTransferByIdPermission(tenantId,id);
 
         FixedAssetTransferResponse response=fixedAssetTransferService.getFixedAssetTransferById(tenantId, id);
         return ResponseEntity.ok(response);
@@ -92,7 +92,7 @@ public class FixedAssetTransferController {
             @PathVariable UUID tenantId,
             @PathVariable UUID id,
             @RequestBody @Valid FixedAssetTransferRequest request) {
-        permissionEvaluator.updateFixedAssetTransferPermission(tenantId);
+//        permissionEvaluator.updateFixedAssetTransferPermission(tenantId);
 
         FixedAssetTransferResponse updated=fixedAssetTransferService.updateFixedAssetTransfer(tenantId, id, request);
 
@@ -104,6 +104,7 @@ public class FixedAssetTransferController {
     public void deleteFixedAssetTransfer(
             @PathVariable UUID tenantId,
             @PathVariable UUID id) {
+//    permissionEvaluator.deleteFixedAssetTransferPermission(tenantId);
         fixedAssetTransferService.deleteFixedAssetTransfer(tenantId, id);
     }
 

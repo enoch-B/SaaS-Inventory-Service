@@ -98,10 +98,10 @@ public class InventoryCountService {
    /*
      Update Inventory Count
     */
-    public InventoryCountResponse updateInventoryCount(UUID tenantId, UUID countId, @Valid InventoryCountRequest request) {
-        InventoryCount existingCount= validationUtil.getInventoryCountById(tenantId,countId);
+    public InventoryCountResponse updateInventoryCount(UUID tenantId, UUID id, @Valid InventoryCountRequest request) {
+        InventoryCount existingCount= validationUtil.getInventoryCountById(tenantId,id);
 
-        existingCount= inventoryCountMapper.mapUpdateRequest(existingCount,request);
+        existingCount= inventoryCountMapper.mapUpdateRequest(tenantId,existingCount,request);
 
         InventoryCount updatedCount= inventoryCountRepository.save(existingCount);
 

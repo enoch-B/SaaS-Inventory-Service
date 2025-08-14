@@ -1,6 +1,7 @@
 package com.saas.inventory.model.StockDisposal;
 
 
+import com.saas.inventory.enums.DisposalMethod;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Generated;
@@ -22,7 +23,8 @@ public class StockDisposalDetail {
 
 
     @Column(nullable = false)
-    private String disposalMethod; // e.g., "Sell", "Donate", "Recycle", etc.
+    @Enumerated(EnumType.STRING)
+    private DisposalMethod disposalMethod; // e.g., "Sell", "Donate", "Recycle", etc.
 
     @Column(nullable = false)
     private  String description; // Description of the disposal action

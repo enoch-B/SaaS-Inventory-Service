@@ -70,6 +70,7 @@ public class DisposableAssetMapper {
         response.setStoreId(disposableAsset.getStoreId());
         response.setDisposableType(disposableAsset.getDisposableType());
         response.setDisposalStatus(disposableAsset.getDisposalStatus());
+        response.setRequisitionDate(disposableAsset.getRequisitionDate());
         response.setDrNo(disposableAsset.getDrNo());
         response.setDepartmentId(disposableAsset.getDepartmentId());
         response.setCreatedAt(disposableAsset.getCreatedAt());

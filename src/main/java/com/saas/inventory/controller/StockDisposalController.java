@@ -39,9 +39,9 @@ public class StockDisposalController {
     public ResponseEntity<StockDisposalResponse> addStockDisposal(
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Stock Disposal request body") @RequestPart(value = "request") @Valid StockDisposalRequest request,
-            @Parameter(description = "File upload") @RequestPart(value = "file") MultipartFile file) throws IOException {
+            @Parameter(description = "File upload") @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
 
-        permissionEvaluator.addStockDisposalPermission(tenantId);
+//        permissionEvaluator.addStockDisposalPermission(tenantId);
         StockDisposalResponse response = stockDisposalService.addStockDisposal(tenantId, request, file);
         return ResponseEntity.ok(response);
     }
@@ -53,7 +53,7 @@ public class StockDisposalController {
              @Valid @RequestPart("request") StockDisposalRequest request,
             @Parameter(description = "File upload") @RequestPart("file") MultipartFile file) throws IOException {
 
-         permissionEvaluator.updateStockDisposalPermission(tenantId);
+//         permissionEvaluator.updateStockDisposalPermission(tenantId);
 
         StockDisposalResponse updated = stockDisposalService.updateStockDisposal(tenantId, id, request, file);
 
@@ -64,7 +64,7 @@ public class StockDisposalController {
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Page number") @RequestParam(defaultValue = "0") int page,
             @Parameter(description = "Page size") @RequestParam(defaultValue = "10") int size) {
-        permissionEvaluator.getAllStockDisposalPermission(tenantId);
+//        permissionEvaluator.getAllStockDisposalPermission(tenantId);
         Page<StockDisposalResponse> response = stockDisposalService.getAllStockDisposal(tenantId, page, size);
         return ResponseEntity.ok(response);
     }
@@ -73,7 +73,7 @@ public class StockDisposalController {
     public ResponseEntity<StockDisposalResponse> getStockDisposalById(
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Stock Disposal ID") @PathVariable UUID id) {
-        permissionEvaluator.getStockDisposalByIdPermission(tenantId);
+//        permissionEvaluator.getStockDisposalByIdPermission(tenantId);
 
         StockDisposalResponse response = stockDisposalService.getStockDisposalById(tenantId, id);
         return ResponseEntity.ok(response);
@@ -84,7 +84,7 @@ public class StockDisposalController {
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Stock Disposal Number") @PathVariable String disposalNumber ) {
 
-        permissionEvaluator.getStockDisposalByDisposalNumberPermission(tenantId);
+//        permissionEvaluator.getStockDisposalByDisposalNumberPermission(tenantId);
 
         StockDisposalResponse response = stockDisposalService.getStockDisposalBySDNumber(tenantId, disposalNumber);
         return ResponseEntity.ok(response);
@@ -95,7 +95,7 @@ public class StockDisposalController {
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Stock Disposal ID") @PathVariable UUID id) {
 
-        permissionEvaluator.deleteStockDisposalPermission(tenantId);
+//        permissionEvaluator.deleteStockDisposalPermission(tenantId);
         stockDisposalService.deleteStockDisposal(tenantId, id);
         return ResponseEntity.ok("Deleted Successfully");
     }

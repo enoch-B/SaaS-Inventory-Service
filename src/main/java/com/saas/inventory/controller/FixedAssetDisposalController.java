@@ -44,10 +44,10 @@ public class FixedAssetDisposalController {
 
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
    public ResponseEntity<?> addFixedAssetDisposal(@PathVariable UUID tenantId,
-                                                  @RequestPart("request") @Valid FixedAssetDisposalRequest request, @RequestPart(value = "file", required = false) MultipartFile file, DisposableAsset disposableAsset) throws IOException {
+                                                  @RequestPart("request") @Valid FixedAssetDisposalRequest request, @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
          // Check permissions for adding fixed asset disposal
         permissionEvaluator.addFixedAssetDisposalPermission(tenantId);
-       FixedAssetDisposalResponse response= fixedAssetDisposalService.addFixedAssetDisposal(tenantId, request, file, disposableAsset);
+       FixedAssetDisposalResponse response= fixedAssetDisposalService.addFixedAssetDisposal(tenantId, request, file);
          return new ResponseEntity<>(response, HttpStatus.CREATED);
    }
 
@@ -70,6 +70,8 @@ public class FixedAssetDisposalController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
+        // Check permissions for getting all fixed asset disposals
+        permissionEvaluator.getAllFixedAssetDisposalPermission(tenantId);
         Page<FixedAssetDisposalResponse> response = fixedAssetDisposalService.getAllFixedAssetDisposal(tenantId, page, size);
         return ResponseEntity.ok(response);
     }
