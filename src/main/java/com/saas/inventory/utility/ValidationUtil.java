@@ -3,6 +3,7 @@ package com.saas.inventory.utility;
 import com.saas.inventory.client.*;
 import com.saas.inventory.dto.clientDto.*;
 import com.saas.inventory.exception.ResourceNotFoundException;
+import com.saas.inventory.model.DisposalCollection.DisposableAsset;
 import com.saas.inventory.model.FixedAssetDisposal.FixedAssetDisposal;
 import com.saas.inventory.model.FixedAssetReturn.FixedAssetReturn;
 import com.saas.inventory.model.FixedAssetTransfer.FixedAssetTransfer;
@@ -12,6 +13,7 @@ import com.saas.inventory.model.LostFixedAsset.LostFixedAsset;
 import com.saas.inventory.model.LostStockItem.LostStockItem;
 import com.saas.inventory.model.NeedAssessment.NeedAssessment;
 import com.saas.inventory.model.StockDisposal.StockDisposal;
+import com.saas.inventory.repository.DispoalCollection.DisposableAssetRepository;
 import com.saas.inventory.repository.FixedAssetDisposal.FixedAssetDisposalRepository;
 import com.saas.inventory.repository.FixedAssetReturn.FixedAssetReturnRepository;
 import com.saas.inventory.repository.FixedAssetTransfer.FixedAssetTransferRepository;
@@ -46,6 +48,7 @@ public class ValidationUtil {
      private final  StoreServiceClient storeServiceClient;
      private final FixedAssetServiceClient fixedAssetServiceClient;
      private final EmployeeServiceClient employeeServiceClient;
+    private final DisposableAssetRepository disposableAssetRepository;
 
 
     public void validateDrNo(String drNo) {
@@ -164,6 +167,12 @@ public class ValidationUtil {
             return stockDisposalRepository.findById(id)
                     .filter(sd-> sd.getTenantId().equals(tenantId))
                     .orElseThrow(()-> new ResourceNotFoundException("Stock Disposal not found with id: " + id));
+    }
+
+    public DisposableAsset getDisposableAssetById(UUID tenantId, UUID disposableAssetId) {
+            return disposableAssetRepository.findById(disposableAssetId)
+                    .filter(da -> da.getTenantId().equals(tenantId))
+                    .orElseThrow(() -> new ResourceNotFoundException("Disposable Asset not found with id: " + disposableAssetId));
     }
 }
 
