@@ -92,6 +92,9 @@ public class PermissionEvaluator {
     public void getFixedAssetDisposalByIdPermission(UUID tenantId) {
         checkPermission(tenantId, ResourceName.GET_FIXED_ASSET_DISPOSAL_BY_ID);
     }
+    public void getAllFixedAssetDisposalPermission(UUID tenantId) {
+        checkPermission(tenantId, ResourceName.GET_ALL_FIXED_ASSET_DISPOSAL);
+    }
 
 
      /* Need Assessment Permission */
@@ -287,4 +290,6 @@ public class PermissionEvaluator {
     public void deleteStockDisposalPermission(UUID tenantId) {
         checkPermission(tenantId, ResourceName.DELETE_STOCK_DISPOSAL);
     }
+
+
 }
