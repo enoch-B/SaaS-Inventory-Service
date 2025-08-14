@@ -26,10 +26,11 @@ import static java.util.stream.Collectors.toList;
 public class FixedAssetDisposalMapper {
     private final ValidationUtil validationUtil;
 
-    public FixedAssetDisposal toEntity( UUID tenantId, FixedAssetDisposalRequest request, MultipartFile file,DisposableAsset disposableAsset)
+    public FixedAssetDisposal toEntity( UUID tenantId, FixedAssetDisposalRequest request, MultipartFile file)
     throws IOException {
         FixedAssetDisposal assetDisposal = new FixedAssetDisposal();
         StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
+        DisposableAsset disposableAsset = validationUtil.getDisposableAssetById(tenantId, request.getDisposableAssetId());
 
         assetDisposal.setTenantId(tenantId);
         assetDisposal.setStoreId(store.getId());
@@ -37,6 +38,7 @@ public class FixedAssetDisposalMapper {
         assetDisposal.setApprovedDate(request.getApprovedDate());
         assetDisposal.setProposedDate(request.getProposedDate());
         assetDisposal.setDisposableAsset(disposableAsset);
+
 
 
 

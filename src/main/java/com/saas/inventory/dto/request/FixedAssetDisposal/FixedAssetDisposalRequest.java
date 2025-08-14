@@ -17,7 +17,7 @@ public class FixedAssetDisposalRequest {
     private UUID storeId;
 
 
-
+    @NotNull(message = "Fixed Asset Disposal No is required")
     private String fixedAssetDisposalNo;
 
 
