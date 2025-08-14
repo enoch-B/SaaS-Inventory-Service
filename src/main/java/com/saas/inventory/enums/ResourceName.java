@@ -18,7 +18,7 @@ public enum ResourceName {
     ADD_DISPOSAL_COLLECTION("Add Disposal Collection"),
     GET_ALL_DISPOSAL_COLLECTION("Get All Disposal Collections"),
     GET_DISPOSAL_COLLECTION_BY_ID("Get Disposal Collection by ID"),
-    GET_DISPOSAL_COLLECTION_BY_DR_NO("Get Disposal Collection by DR Number"),
+    GET_DISPOSAL_COLLECTION_BY_DR_NO("Get Disposal Collection by DR No"),
     DELETE_DISPOSAL_COLLECTION("Delete Disposal Collection"),
     UPDATE_DISPOSAL_COLLECTION("Update Disposal Collection"),
 
@@ -51,6 +51,7 @@ public enum ResourceName {
     GET_FIXED_ASSET_TRANSFER_BY_TRANSFER_NO("Get Fixed Asset Transfer by Transfer Number"),
     GET_FIXED_ASSET_TRANSFER_BY_ID("Get Fixed Asset Transfer By Id"),
     UPDATE_FIXED_ASSET_TRANSFER("Update Fixed Asset Transfer"),
+    DELETE_FIXED_ASSET_TRANSFER("Delete Fixed Asset Transfer"),
 
     /*
      Inventory Count Resource
@@ -59,8 +60,8 @@ public enum ResourceName {
     ADD_INVENTORY_COUNT("Add Inventory Count "),
     GET_INVENTORY_COUNT_BY_ID("Get Inventory Count By Id"),
     GET_ALL_INVENTORY_COUNT("Get All Inventory Count"),
-    GET_INVENTORY_COUNT_BY_COUNT_NO("Get Inventory Count By Count Number"),
-    UPDATE_INVENTORY_COUNT("Update Inventory COUNT"),
+    GET_INVENTORY_COUNT_BY_COUNT_NO("Get Inventory Count By Count No"),
+    UPDATE_INVENTORY_COUNT("Update Inventory Count"),
     DELETE_INVENTORY_COUNT("Delete Inventory Count"),
 
     /*
@@ -69,7 +70,7 @@ public enum ResourceName {
 
     ADD_LOST_FIXED_ASSET("Add Lost Fixed Asset"),
     GET_LOST_FIXED_ASSET_BY_ID("Get Lost fixed asset by id"),
-    GET_LOST_FIXED_ASSET_BY_LOST_ITEM_NO("Get by unique lost item number"),
+    GET_LOST_FIXED_ASSET_BY_LOST_ITEM_NO("Get Lost Fixed Asset By Lost Item No"),
     UPDATE_LOST_FIXED_ASSET("Update Lost Fixed Asset"),
     DELETE_LOST_FIXED_ASSET("Delete Lost Fixed Asset"),
     GET_ALL_LOST_FIXED_ASSET("Get All Lost Fixed Asset"),
@@ -78,11 +79,11 @@ public enum ResourceName {
       Lost Stock Item
      */
 
-    ADD_LOST_STOCK_ITEM("add Lost stock item"),
-    GET_ALL_LOST_STOCK_ITEM("Get All Lost Item"),
-    GET_LOST_STOCK_ITEM_BY_ID("Get Lost Stock Item By Unique Id"),
-    GET_LOST_STOCK_ITEM_BY_LOST_STOCK_ITEM_NO("Get Lost Stock Item By Unique Number"),
-    UPDATE_LOST_STOCK_ITEM("Update the lost stock item content"),
+    ADD_LOST_STOCK_ITEM("Add Lost stock item"),
+    GET_ALL_LOST_STOCK_ITEM("Get All Lost Stock Item"),
+    GET_LOST_STOCK_ITEM_BY_ID("Get Lost Stock Item By Id"),
+    GET_LOST_STOCK_ITEM_BY_LOST_STOCK_ITEM_NO("Get Lost Stock Item By Lost Stock Item No"),
+    UPDATE_LOST_STOCK_ITEM("Update the lost stock item "),
     DELETE_LOST_STOCK_ITEM("Delete Lost Stock Item"),
     /*
       Inventory Balance
@@ -101,7 +102,7 @@ public enum ResourceName {
     GET_STOCK_DISPOSAL_BY_DISPOSAL_NO("Get Stock Disposal By Disposal Number"),
     UPDATE_STOCK_DISPOSAL("Update Stock Disposal"),
     DELETE_STOCK_DISPOSAL("Delete Stock Disposal"),
-    ADD_STOCK_DISPOSAL("Create Stock Disposal");
+    ADD_STOCK_DISPOSAL("Add Stock Disposal");
 
     private final String value;
 
