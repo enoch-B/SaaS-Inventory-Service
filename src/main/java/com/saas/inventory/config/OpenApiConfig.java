@@ -30,7 +30,7 @@ public class OpenApiConfig {
         public OpenAPI customOpenAPI() {
 
                 String apiGatewayBaseUrl = this.apiGatewayBaseUrl;
-                String localhostUrl  = "http://172.20.85.31:" + this.serverPort;
+                String localhostUrl  = "http://localhost:" + this.serverPort;
                 String applicationName = this.capitalizeApplicationName(this.applicationName);
 
                 return new OpenAPI()

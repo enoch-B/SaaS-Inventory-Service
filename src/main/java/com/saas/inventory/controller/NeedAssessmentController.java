@@ -30,7 +30,7 @@ public class NeedAssessmentController {
             @Parameter(description = "Tenant ID",required = true) @PathVariable UUID tenantId,
             @Parameter(description = "Need Assessment request body") @RequestBody @Valid NeedAssessmentRequest needAssessmentRequest) {
 
-//        permissionEvaluator.addNeedAssessmentPermission(tenantId);
+        permissionEvaluator.addNeedAssessmentPermission(tenantId);
 
 
         NeedAssessmentResponse response = needAssessmentService.addNeedAssessment(tenantId, needAssessmentRequest);

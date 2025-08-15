@@ -45,7 +45,7 @@ public class LostFixedAssetController {
             @RequestPart(value = "file", required = false)MultipartFile file)
             throws IOException {
 
-//        permissionEvaluator.addLostFixedAssetPermission(tenantId);
+        permissionEvaluator.addLostFixedAssetPermission(tenantId);
 
         LostFixedAssetResponse response=lostFixedAssetService.addLostFixedAsset(tenantId, lostFixedAssetRequest,file);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
@@ -57,7 +57,7 @@ public class LostFixedAssetController {
             @Parameter(description = "Page number") @RequestParam(defaultValue = "0") int page,
             @Parameter(description = "Page size") @RequestParam(defaultValue = "10") int size) {
 
-//         permissionEvaluator.getAllLostFixedAssetPermission(tenantId);
+         permissionEvaluator.getAllLostFixedAssetPermission(tenantId);
         Page<LostFixedAssetResponse> response = lostFixedAssetService.getAllLostFixedAssets(tenantId, page, size);
         return ResponseEntity.ok(response);
     }
@@ -67,7 +67,7 @@ public class LostFixedAssetController {
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Lost Fixed Asset ID") @PathVariable UUID id) {
 
-//        permissionEvaluator.getLostFixedAssetByIdPermission(tenantId);
+        permissionEvaluator.getLostFixedAssetByIdPermission(tenantId);
 
         LostFixedAssetResponse response = lostFixedAssetService.getLostFixedAssetById(tenantId, id);
         return ResponseEntity.ok(response);
@@ -76,7 +76,7 @@ public class LostFixedAssetController {
     public ResponseEntity<?>getLFAssetByLostItemNo(@PathVariable UUID tenantId,
                                                    @PathVariable String lostItemNo) throws IOException{
 
-//        permissionEvaluator.getByLostItemNoPermission(tenantId);
+        permissionEvaluator.getByLostItemNoPermission(tenantId);
         LostFixedAssetResponse response=lostFixedAssetService.getLostFixedAssetByLostItemNo(tenantId,lostItemNo);
 
         return ResponseEntity.ok(response);
@@ -94,7 +94,7 @@ public class LostFixedAssetController {
             @RequestPart(value = "file", required = false) MultipartFile file
             ) throws  IOException{
 
-//        permissionEvaluator.updateLostFixedAssetTransferPermission(tenantId);
+        permissionEvaluator.updateLostFixedAssetTransferPermission(tenantId);
 
         LostFixedAssetResponse updated = lostFixedAssetService.updateLostFixedAsset(tenantId, id, request,file);
 
@@ -105,7 +105,7 @@ public class LostFixedAssetController {
     public ResponseEntity<String> deleteLostFixedAsset(
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Lost Fixed Asset ID") @PathVariable UUID id) {
-//        permissionEvaluator.deleteLostFixedAssetPermission(tenantId);
+        permissionEvaluator.deleteLostFixedAssetPermission(tenantId);
 
         lostFixedAssetService.deleteLostFixedAsset(tenantId, id);
 

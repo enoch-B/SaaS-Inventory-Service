@@ -40,7 +40,7 @@ public class InventoryCountController {
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Inventory Count request body") @RequestBody @Valid InventoryCountRequest request) {
 
-//        permissionEvaluator.addInventoryCountPermission(tenantId);
+        permissionEvaluator.addInventoryCountPermission(tenantId);
 
         InventoryCountResponse response=inventoryCountService.createInventoryCount(tenantId, request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -51,7 +51,7 @@ public class InventoryCountController {
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Inventory Count ID") @PathVariable UUID id) {
 
-//        permissionEvaluator.getInventoryCountByIdPermission(tenantId);
+        permissionEvaluator.getInventoryCountByIdPermission(tenantId);
         InventoryCountResponse response = inventoryCountService.getInventoryCountById(tenantId, id);
         return ResponseEntity.ok(response);
     }
@@ -62,7 +62,7 @@ public class InventoryCountController {
             @Parameter(description = "Page number") @RequestParam(defaultValue = "0") int page,
             @Parameter(description = "Page size") @RequestParam(defaultValue = "10") int size) {
 
-//         permissionEvaluator.getAllInventoryCountPermission(tenantId);
+         permissionEvaluator.getAllInventoryCountPermission(tenantId);
         Page<InventoryCountResponse> response = inventoryCountService.getPaginatedInventoryCounts(tenantId, page, size);
         return ResponseEntity.ok(response);
     }
@@ -70,7 +70,7 @@ public class InventoryCountController {
    @GetMapping("/get-by/{inventoryCountNumber}")
     public ResponseEntity<?> getInventoryCountByCountNo(@PathVariable UUID tenantId,
                                                         @PathVariable String inventoryCountNumber){
-//        permissionEvaluator.getInventoryCountByCountNumber(tenantId);
+        permissionEvaluator.getInventoryCountByCountNumber(tenantId);
 
         InventoryCountResponse response=inventoryCountService.getInventoryCountByCountNo(tenantId,inventoryCountNumber);
 
@@ -83,7 +83,7 @@ public class InventoryCountController {
             @Parameter(description = "Inventory Count ID") @PathVariable UUID id,
             @Parameter(description = "Updated inventory count request body") @RequestBody @Valid InventoryCountRequest inventoryCountRequest) {
 
-//        permissionEvaluator.updateInventoryCountPermission(tenantId);
+        permissionEvaluator.updateInventoryCountPermission(tenantId);
         InventoryCountResponse response = inventoryCountService.updateInventoryCount(tenantId, id, inventoryCountRequest);
         return ResponseEntity.ok(response);
     }
@@ -93,7 +93,7 @@ public class InventoryCountController {
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Inventory Count ID") @PathVariable UUID id) {
 
-//        permissionEvaluator.deleteInventoryCountPermission(tenantId);
+        permissionEvaluator.deleteInventoryCountPermission(tenantId);
 
         inventoryCountService.deleteInventoryCount(tenantId, id);
         return ResponseEntity.ok("Inventory Count Deleted Successfully");

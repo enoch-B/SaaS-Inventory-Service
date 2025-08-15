@@ -43,7 +43,7 @@ public class LostStockItemController {
             @RequestPart("request") @Valid LostStockItemRequest request,
             @Parameter(description = "Optional file upload") @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
 
-//        permissionEvaluator.addLostStockItemPermission(tenantId);
+        permissionEvaluator.addLostStockItemPermission(tenantId);
 
         LostStockItemResponse response = lostStockItemService.addLostStockItem(tenantId, request, file);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -55,7 +55,7 @@ public class LostStockItemController {
             @Parameter(description = "Page number") @RequestParam(defaultValue = "0") int page,
             @Parameter(description = "Page size") @RequestParam(defaultValue = "10") int size) {
 
-//        permissionEvaluator.getAllLostStockItemPermission(tenantId);
+        permissionEvaluator.getAllLostStockItemPermission(tenantId);
         Page<LostStockItemResponse> response = lostStockItemService.getAllLostStockItem(tenantId, page, size);
         return ResponseEntity.ok(response);
     }
@@ -65,7 +65,7 @@ public class LostStockItemController {
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Lost Stock Item ID") @PathVariable UUID id) {
 
-//          permissionEvaluator.getLostStockItemByIdPermission(tenantId);
+          permissionEvaluator.getLostStockItemByIdPermission(tenantId);
 
         LostStockItemResponse response = lostStockItemService.getLostStockItemById(tenantId, id);
         return ResponseEntity.ok(response);
@@ -74,7 +74,7 @@ public class LostStockItemController {
 
     public ResponseEntity<?> getLostStockItemByLostStockItemNo(@PathVariable UUID tenantId, @PathVariable String lostStockItemNo){
 
-//        permissionEvaluator.getLostStockItemByLostStockItemNoPermission(tenantId);
+        permissionEvaluator.getLostStockItemByLostStockItemNoPermission(tenantId);
 
         LostStockItemResponse response=lostStockItemService.getLostStockItemByLSNo(tenantId, lostStockItemNo);
 
@@ -88,7 +88,7 @@ public class LostStockItemController {
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Lost Stock Item ID") @PathVariable UUID id) {
 
-//        permissionEvaluator.deleteLostStockItemPermission(tenantId);
+        permissionEvaluator.deleteLostStockItemPermission(tenantId);
 
         lostStockItemService.deleteLostStockItem(tenantId, id);
         return ResponseEntity.ok("Deleted Successfully");
@@ -101,7 +101,7 @@ public class LostStockItemController {
               @PathVariable UUID id,
              @RequestPart("request") @Valid LostStockItemRequest request,
             @Parameter(description = "Optional file upload") @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
-//        permissionEvaluator.updateLostStockItemPermission(tenantId);
+        permissionEvaluator.updateLostStockItemPermission(tenantId);
 
         LostStockItemResponse updated = lostStockItemService.updateLostStockItem(tenantId, id, request, file);
         return ResponseEntity.ok(updated);

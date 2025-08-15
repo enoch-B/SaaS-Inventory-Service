@@ -21,8 +21,6 @@ public class InventoryBalanceItemRequest {
     @DecimalMin(value = "0", inclusive = true, message = "Bin balance cannot be negative")
     private BigDecimal binBalance;
 
-    @NotNull(message = "Difference is required")
-    private BigDecimal difference;
 
     private String remark;
 }

@@ -42,7 +42,7 @@ public class FixedAssetReturnController {
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Valid @RequestBody FixedAssetReturnRequest request) {
 
-//        permissionEvaluator.addFixedAssetReturnPermission(tenantId);
+        permissionEvaluator.addFixedAssetReturnPermission(tenantId);
 
         FixedAssetReturnResponse response=fixedAssetReturnService.addFixedAssetReturn(tenantId, request);
 
@@ -55,7 +55,7 @@ public class FixedAssetReturnController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
 
-//        permissionEvaluator.getAllFixedAssetReturnPermission(tenantId);
+        permissionEvaluator.getAllFixedAssetReturnPermission(tenantId);
         Page<FixedAssetReturnResponse> response = fixedAssetReturnService.getAllFixedAssetReturns(tenantId, page, size);
         return ResponseEntity.ok(response);
     }
@@ -65,7 +65,7 @@ public class FixedAssetReturnController {
             @Parameter(description = "Tenant ID", required = true) @PathVariable UUID tenantId,
             @Parameter(description = "Fixed Asset Return ID", required = true) @PathVariable UUID id) {
 
-//         permissionEvaluator.getFixedAssetReturnByIdPermission(tenantId);
+         permissionEvaluator.getFixedAssetReturnByIdPermission(tenantId);
         FixedAssetReturnResponse response = fixedAssetReturnService.getFixedAssetReturnById(tenantId, id);
         return ResponseEntity.ok(response);
     }
@@ -75,7 +75,7 @@ public class FixedAssetReturnController {
             @Parameter(description = "Tenant ID", required = true) @PathVariable UUID tenantId,
             @Parameter(description = "Fixed Asset Return ID") @PathVariable UUID id) {
 
-//         permissionEvaluator.deleteFixedAssetReturnPermission(tenantId);
+         permissionEvaluator.deleteFixedAssetReturnPermission(tenantId);
         fixedAssetReturnService.deleteFixedAssetReturn(tenantId, id);
         return ResponseEntity.ok("Deleted Successfully");
     }
@@ -86,7 +86,7 @@ public class FixedAssetReturnController {
             @Parameter(description = "Fixed Asset Return ID") @PathVariable UUID returnId,
             @RequestBody @Valid FixedAssetReturnRequest request) {
 
-//         permissionEvaluator.updateFixedAssetReturnPermission(tenantId);
+         permissionEvaluator.updateFixedAssetReturnPermission(tenantId);
 
         FixedAssetReturnResponse updated = fixedAssetReturnService.updateFixedAssetReturn(tenantId, returnId, request);
         return ResponseEntity.ok(updated);

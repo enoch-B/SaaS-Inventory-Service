@@ -51,7 +51,7 @@ public class PermissionEvaluator {
     private void checkPermission(UUID tenantId, ResourceName resourceName) {
         boolean hasPermission = permissionUtil.hasPermission(tenantId, resourceName.getValue());
         if (!hasPermission) {
-            throw new AccessDeniedException("Access Denied");
+            throw new AccessDeniedException("Access Denied To Resource: " + resourceName.getValue());
         }
     }
 

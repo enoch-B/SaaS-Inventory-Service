@@ -34,6 +34,8 @@ public class ResourceController {
         return ResponseEntity.status(HttpStatus.OK).body("Resources added successfully.");
     }
 
+
+
     @GetMapping("/get-all")
     public ResponseEntity<?> getAllResources(
             @PathVariable UUID tenantId) {
