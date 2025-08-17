@@ -89,7 +89,7 @@ public class LostFixedAssetService {
         LostFixedAsset existingAsset=validationUtil.getLostFixedAssetById(tenantId,id);
 
 
-        existingAsset=lostFixedAssetMapper.updateLostFixedAsset(existingAsset,request,file);
+        existingAsset=lostFixedAssetMapper.updateLostFixedAsset(tenantId,existingAsset,request,file);
 
         LostFixedAsset updated= lostFixedAssetRepository.save(existingAsset);
 

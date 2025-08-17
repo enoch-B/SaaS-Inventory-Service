@@ -25,7 +25,7 @@ public class ResourceMapper {
         resource.setCreatedBy(eventResponse.getCreatedBy());
 
         Set<String> roles = new HashSet<>();
-        String adminRole = "admin";
+        String adminRole = "insa_admin";
         roles.add(adminRole);
         if (roleName != null) {
             roles.add(roleName);

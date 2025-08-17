@@ -53,7 +53,7 @@ public class PermissionUtil {
         Jwt jwt = securityUtil.getUserJwt();
         Collection<GrantedAuthority> userRoles = roleConverter.extractAuthorities(jwt);
         for (GrantedAuthority authority : userRoles) {
-            if (authority.getAuthority().equals("admin") ) {
+            if (authority.getAuthority().equals("admin") || authority.getAuthority().equals("insa_admin")) {
                 return true;
             }
         }

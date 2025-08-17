@@ -124,7 +124,7 @@ public class DisposableAssetService {
                 .orElseThrow(() -> new RuntimeException("Disposable Asset Not Found by this id: " + id));
 
         // Update the existing entity with the new request data
-        disposableAssetMapper.updateDisposableAssetFromRequest(disposableAssetRequest, existing);
+        disposableAssetMapper.updateDisposableAssetFromRequest(tenantId,disposableAssetRequest, existing);
 
         // Save the updated entity
         DisposableAsset updatedAsset = disposableAssetRepository.save(existing);

@@ -1,14 +1,20 @@
 package com.saas.inventory.mapper;
 
 
+import com.saas.inventory.dto.clientDto.DepartmentDto;
+import com.saas.inventory.dto.clientDto.FixedAssetDto;
+import com.saas.inventory.dto.clientDto.StoreDto;
 import com.saas.inventory.dto.request.LostFixedAsset.LostFixedAssetRequest;
 import com.saas.inventory.dto.response.LostFixedAsset.LostFixedAssetResponse;
 import com.saas.inventory.dto.response.LostFixedAsset.LostItemDetailResponse;
 import com.saas.inventory.model.LostFixedAsset.LostFixedAsset;
 import com.saas.inventory.model.LostFixedAsset.LostItemDetail;
 import com.saas.inventory.utility.FileUtil;
+import com.saas.inventory.utility.ValidationUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -17,11 +23,18 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class LostFixedAssetMapper {
+
+    private final ValidationUtil validationUtil;
 
     public LostFixedAsset toEntity(UUID tenantId, LostFixedAssetRequest request, MultipartFile file)
     throws IOException {
         LostFixedAsset lostFixedAsset = new LostFixedAsset();
+
+        DepartmentDto department =validationUtil.getDepartmentById(tenantId, request.getDepartmentId());
+        StoreDto store =validationUtil.getStoreById(tenantId, request.getStoreId());
+
         lostFixedAsset.setTenantId(tenantId);
         lostFixedAsset.setStoreId(request.getStoreId());
         lostFixedAsset.setDepartmentId(request.getDepartmentId());
@@ -31,6 +44,10 @@ public class LostFixedAssetMapper {
         if(request.getLostItemDetails() !=null) {
             List<LostItemDetail> details = request.getLostItemDetails().stream().map(detailRequest -> {
                 LostItemDetail detail = new LostItemDetail();
+
+//                FixedAssetDto asset = validationUtil.getItemById(tenantId, detailRequest.getItemId());
+
+
                 detail.setItemId(detailRequest.getItemId());
                 detail.setTagNo(detailRequest.getTagNo());
                 detail.setDuration(detailRequest.getDuration());
@@ -84,9 +101,11 @@ public class LostFixedAssetMapper {
     }
 
 
-    public LostFixedAsset updateLostFixedAsset(LostFixedAsset lostFixedAsset,
+    public LostFixedAsset updateLostFixedAsset(UUID tenantId,LostFixedAsset lostFixedAsset,
                                                LostFixedAssetRequest request,
                                                MultipartFile file) throws IOException {
+        DepartmentDto department = validationUtil.getDepartmentById(tenantId, request.getDepartmentId());
+        StoreDto store = validationUtil.getStoreById(tenantId, request.getStoreId());
 
         if (request.getStoreId() != null) {
             lostFixedAsset.setStoreId(request.getStoreId());
@@ -120,6 +139,9 @@ public class LostFixedAssetMapper {
         if (request.getLostItemDetails() != null) {
             List<LostItemDetail> details = request.getLostItemDetails().stream().map(detailRequest -> {
                 LostItemDetail detail = new LostItemDetail();
+
+//                FixedAssetDto lostFixedAssetDto = validationUtil.getItemById(tenantId, detailRequest.getItemId());
+
                 detail.setItemId(detailRequest.getItemId());
                 detail.setTagNo(detailRequest.getTagNo());
                 detail.setDuration(detailRequest.getDuration());

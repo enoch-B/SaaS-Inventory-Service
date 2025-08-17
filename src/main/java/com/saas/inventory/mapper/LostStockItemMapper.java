@@ -1,27 +1,40 @@
 package com.saas.inventory.mapper;
 
 
+import com.saas.inventory.dto.clientDto.DepartmentDto;
+import com.saas.inventory.dto.clientDto.FixedAssetDto;
 import com.saas.inventory.dto.request.LostStockItem.LostStockItemRequest;
 import com.saas.inventory.dto.response.LostStockItem.LostStockItemDetailResponse;
 import com.saas.inventory.dto.response.LostStockItem.LostStockItemResponse;
 import com.saas.inventory.model.LostStockItem.LostStockItem;
 import com.saas.inventory.model.LostStockItem.LostStockItemDetail;
 import com.saas.inventory.utility.FileUtil;
+import com.saas.inventory.utility.ValidationUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.plaf.synth.Region;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class LostStockItemMapper {
+
+    private final ValidationUtil validationUtil;
 
     public LostStockItem mapToEntity(UUID tenantId,
                                      LostStockItemRequest request,
                                      MultipartFile file) throws IOException {
+
+        DepartmentDto department=validationUtil.getDepartmentById(tenantId, request.getDepartmentId());
+//        Region region = validationUtil.getRegionById(tenantId, request.getRegionId());
+        // StoreDto store = validationUtil.getStoreById(tenantId, request.getStoreId());
+
 
         LostStockItem lostStockItem = new LostStockItem();
         lostStockItem.setTenantId(tenantId);
@@ -37,6 +50,9 @@ public class LostStockItemMapper {
         if (request.getLostStockItemDetailRequest() != null) {
             List<LostStockItemDetail> details = request.getLostStockItemDetailRequest().stream().map(detailRequest -> {
                 LostStockItemDetail detail = new LostStockItemDetail();
+
+//                FixedAssetDto lostStockItemDto = validationUtil.getItemById(tenantId, detailRequest.getItemId());
+
                 detail.setItemId(detailRequest.getItemId());
                 detail.setDuration(detailRequest.getDuration());
                 detail.setDescription(detailRequest.getDescription());
@@ -93,9 +109,14 @@ public class LostStockItemMapper {
     }
 
 
-    public LostStockItem mapUpdateRequest(LostStockItemRequest request,
+    public LostStockItem mapUpdateRequest(UUID tenantId,LostStockItemRequest request,
                                           MultipartFile file,
                                           LostStockItem lostStockItem) throws IOException {
+
+//        DepartmentDto department = validationUtil.getDepartmentById(tenantId, request.getDepartmentId());
+//       Region region = validationUtil.getRegionById(tenantId, request.getRegionId());
+//       StoreDto store = validationUtil.getStoreById(tenantId, request.getStoreId
+//
 
         if (request.getLostStockItemNo() != null) {
             lostStockItem.setLostStockItemNo(request.getLostStockItemNo());
@@ -133,6 +154,8 @@ public class LostStockItemMapper {
             List<LostStockItemDetail> details = request.getLostStockItemDetailRequest().stream()
                     .map(detailReq -> {
                         LostStockItemDetail detail = new LostStockItemDetail();
+//                 FixedAssetDto lostStockItemDto = validationUtil.getItemById(tenantId, detailReq.getItemId());
+
                         detail.setItemId(detailReq.getItemId());
                         detail.setQuantity(detailReq.getQuantity());
                         detail.setDescription(detailReq.getDescription());

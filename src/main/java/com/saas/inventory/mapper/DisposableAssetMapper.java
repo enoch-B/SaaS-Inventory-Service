@@ -99,8 +99,10 @@ public class DisposableAssetMapper {
 
     }
 
-    public void updateDisposableAssetFromRequest(DisposableAssetRequest disposableAssetRequest, DisposableAsset disposableAsset) {
+    public void updateDisposableAssetFromRequest(UUID tenantID,DisposableAssetRequest disposableAssetRequest, DisposableAsset disposableAsset) {
 
+//        DepartmentDto department = validationUtil.getDepartmentById(tenantID, disposableAssetRequest.getDepartmentId());
+//        StoreDto store = validationUtil.getStoreById(tenantID, disposableAssetRequest.getStoreId());
         if (disposableAssetRequest.getDisposableType() != null)
             disposableAsset.setDisposableType(disposableAssetRequest.getDisposableType());
 
@@ -125,6 +127,8 @@ public class DisposableAssetMapper {
                     .stream()
                     .map(detailRequest -> {
                         DisposableFixedAssetDetail detail = new DisposableFixedAssetDetail();
+
+//                        FixedAssetDto asset = validationUtil.getItemById(tenantID, detailRequest.getItemId());
                         detail.setItemId(detailRequest.getItemId());
                         detail.setBatchNo(detailRequest.getBatchNo());
                         detail.setDescription(detailRequest.getDescription());
