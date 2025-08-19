@@ -53,7 +53,10 @@ public class FixedAssetDisposalService {
 
     public FixedAssetDisposalResponse addFixedAssetDisposal(UUID tenantId, FixedAssetDisposalRequest request, MultipartFile file) throws IOException {
 
-        FixedAssetDisposal entity = fixedAssetDisposalMapper.toEntity(tenantId, request, file);
+        DisposableAsset disposableAsset = validationUtil.getDisposableAssetById(tenantId, request.getDisposableAssetId());
+
+
+        FixedAssetDisposal entity = fixedAssetDisposalMapper.toEntity(disposableAsset,tenantId, request, file);
 
         FixedAssetDisposal savedEntity = fixedAssetDisposalRepository.save(entity);
 
@@ -63,9 +66,11 @@ public class FixedAssetDisposalService {
 
 
     public FixedAssetDisposalResponse updateFixedAssetDisposal(UUID tenantId, UUID id, FixedAssetDisposalRequest request, MultipartFile file) throws IOException {
+       DisposableAsset disposableAsset=validationUtil.getDisposableAssetById(tenantId, id);
+
         FixedAssetDisposal existing= validationUtil.getFixedAssetDisposalById(tenantId, id);
 
-        existing=fixedAssetDisposalMapper.updateEntity(tenantId, existing, request,file);
+        existing=fixedAssetDisposalMapper.updateEntity(tenantId, existing, request,file, disposableAsset);
 
         FixedAssetDisposal updatedEntity = fixedAssetDisposalRepository.save(existing);
 

@@ -1,6 +1,7 @@
 package com.saas.inventory.dto.clientDto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.saas.inventory.dto.response.BaseResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemDto {
+public class ItemDto extends BaseResponse {
 
         private UUID id;
         private String category;

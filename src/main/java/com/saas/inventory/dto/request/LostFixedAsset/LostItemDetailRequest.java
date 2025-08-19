@@ -15,9 +15,6 @@ public class LostItemDetailRequest {
     @NotNull(message = "Item ID is required")
     private UUID itemId;
 
-    // unique identifier for the item
-    private String tagNo;
-
 
     @NotBlank(message = "Duration is required")
     private String duration;

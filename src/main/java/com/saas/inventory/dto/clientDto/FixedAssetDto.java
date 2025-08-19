@@ -1,12 +1,15 @@
 package com.saas.inventory.dto.clientDto;
 
+import com.saas.inventory.dto.response.BaseResponse;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class FixedAssetDto {
+public class FixedAssetDto extends BaseResponse {
      private UUID id;
      private UUID itemId;
      private UUID departmentId;

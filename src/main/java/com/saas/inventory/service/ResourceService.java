@@ -38,7 +38,7 @@ public class ResourceService {
 
         ResourceEvent resourceEvent = new ResourceEvent();
         resourceEvent.setTenantId(tenantId);
-        resourceEvent.setTenantAbbreviatedName("TENANT");
+        resourceEvent.setTenantAbbreviatedName("INSA");
         resourceEvent.setCreatedBy("Super Admin");
         resourceData.saveResource(resourceEvent);
     }

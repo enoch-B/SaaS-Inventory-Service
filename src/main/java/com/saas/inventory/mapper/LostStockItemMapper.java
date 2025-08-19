@@ -3,6 +3,7 @@ package com.saas.inventory.mapper;
 
 import com.saas.inventory.dto.clientDto.DepartmentDto;
 import com.saas.inventory.dto.clientDto.FixedAssetDto;
+import com.saas.inventory.dto.clientDto.StoreDto;
 import com.saas.inventory.dto.request.LostStockItem.LostStockItemRequest;
 import com.saas.inventory.dto.response.LostStockItem.LostStockItemDetailResponse;
 import com.saas.inventory.dto.response.LostStockItem.LostStockItemResponse;
@@ -33,15 +34,15 @@ public class LostStockItemMapper {
 
         DepartmentDto department=validationUtil.getDepartmentById(tenantId, request.getDepartmentId());
 //        Region region = validationUtil.getRegionById(tenantId, request.getRegionId());
-        // StoreDto store = validationUtil.getStoreById(tenantId, request.getStoreId());
+         StoreDto store = validationUtil.getStoreById(tenantId, request.getStoreId());
 
 
         LostStockItem lostStockItem = new LostStockItem();
         lostStockItem.setTenantId(tenantId);
         lostStockItem.setLostStockItemNo(request.getLostStockItemNo());
         lostStockItem.setRegionId(request.getRegionId());
-        lostStockItem.setStoreId(request.getStoreId());
-        lostStockItem.setDepartmentId(request.getDepartmentId());
+        lostStockItem.setStoreId(store.getId());
+        lostStockItem.setDepartmentId(department.getId());
         lostStockItem.setStatus(request.getStatus());
         lostStockItem.setRegistrationDate(request.getRegistrationDate());
         lostStockItem.setCommitteeId(request.getCommitteeId());

@@ -100,7 +100,7 @@ public class FixedAssetTransferService {
     public FixedAssetTransferResponse updateFixedAssetTransfer(UUID tenantId, UUID transferId, FixedAssetTransferRequest request) {
         FixedAssetTransfer existingTransfer = validationUtil.getFixedAssetTransferById(tenantId,transferId);
 
-        existingTransfer=fixedAssetTransferMapper.updateFixedAssetTransfer(existingTransfer,request);
+        existingTransfer=fixedAssetTransferMapper.updateFixedAssetTransfer(tenantId,existingTransfer,request);
 
         FixedAssetTransfer updatedTransfer = fixedAssetTransferRepository.save(existingTransfer);
 

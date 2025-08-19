@@ -26,11 +26,10 @@ import static java.util.stream.Collectors.toList;
 public class FixedAssetDisposalMapper {
     private final ValidationUtil validationUtil;
 
-    public FixedAssetDisposal toEntity( UUID tenantId, FixedAssetDisposalRequest request, MultipartFile file)
+    public FixedAssetDisposal toEntity(DisposableAsset disposableAsset, UUID tenantId, FixedAssetDisposalRequest request, MultipartFile file)
     throws IOException {
         FixedAssetDisposal assetDisposal = new FixedAssetDisposal();
         StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
-        DisposableAsset disposableAsset = validationUtil.getDisposableAssetById(tenantId, request.getDisposableAssetId());
 
         assetDisposal.setTenantId(tenantId);
         assetDisposal.setStoreId(store.getId());
@@ -46,7 +45,7 @@ public class FixedAssetDisposalMapper {
             List<FixedAssetDisposalDetail> details = request.getDisposalDetails().stream().map(detailRequest -> {
                 FixedAssetDisposalDetail detail = new FixedAssetDisposalDetail();
 
-                FixedAssetDto asset=validationUtil.getItemById(tenantId,detailRequest.getItemId());
+                FixedAssetDto asset=validationUtil.getAssetById(tenantId,detailRequest.getItemId());
 
                 detail.setItemId(asset.getId());
                 detail.setItemLocation(detailRequest.getItemLocation());
@@ -118,7 +117,7 @@ public class FixedAssetDisposalMapper {
     }
 
     // Update assetDisposal with request data
-    public FixedAssetDisposal updateEntity(UUID tenantId,FixedAssetDisposal assetDisposal, FixedAssetDisposalRequest request,MultipartFile file)
+    public FixedAssetDisposal updateEntity(UUID tenantId, FixedAssetDisposal assetDisposal, FixedAssetDisposalRequest request, MultipartFile file, DisposableAsset disposableAsset)
     throws IOException{
 
         StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
@@ -134,12 +133,13 @@ public class FixedAssetDisposalMapper {
         if (request.getProposedDate() != null) {
             assetDisposal.setProposedDate(request.getProposedDate());
         }
+       assetDisposal.setDisposableAsset(disposableAsset);
 
         if (request.getDisposalDetails() != null) {
             List<FixedAssetDisposalDetail> details = request.getDisposalDetails().stream().map(detailRequest -> {
                 FixedAssetDisposalDetail detail = new FixedAssetDisposalDetail();
 
-                FixedAssetDto asset=validationUtil.getItemById(tenantId,detailRequest.getItemId());
+                FixedAssetDto asset=validationUtil.getAssetById(tenantId,detailRequest.getItemId());
 
                 detail.setItemId(asset.getId());
                 detail.setItemLocation(detailRequest.getItemLocation());

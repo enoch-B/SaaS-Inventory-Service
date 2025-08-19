@@ -36,8 +36,8 @@ public class LostFixedAssetMapper {
         StoreDto store =validationUtil.getStoreById(tenantId, request.getStoreId());
 
         lostFixedAsset.setTenantId(tenantId);
-        lostFixedAsset.setStoreId(request.getStoreId());
-        lostFixedAsset.setDepartmentId(request.getDepartmentId());
+        lostFixedAsset.setStoreId(store.getId());
+        lostFixedAsset.setDepartmentId(department.getId());
         lostFixedAsset.setLostItemNo(request.getLostItemNo());
         lostFixedAsset.setRegistrationDate(request.getRegistrationDate());
 
@@ -45,11 +45,10 @@ public class LostFixedAssetMapper {
             List<LostItemDetail> details = request.getLostItemDetails().stream().map(detailRequest -> {
                 LostItemDetail detail = new LostItemDetail();
 
-//                FixedAssetDto asset = validationUtil.getItemById(tenantId, detailRequest.getItemId());
 
+          FixedAssetDto item= validationUtil.getAssetById(tenantId, detailRequest.getItemId());
 
-                detail.setItemId(detailRequest.getItemId());
-                detail.setTagNo(detailRequest.getTagNo());
+                detail.setItemId(item.getId());
                 detail.setDuration(detailRequest.getDuration());
                 detail.setDescription(detailRequest.getDescription());
                 detail.setRemark(detailRequest.getRemark());
@@ -87,7 +86,6 @@ public class LostFixedAssetMapper {
                 LostItemDetailResponse detailResponse = new LostItemDetailResponse();
 
                 detailResponse.setItemId(detail.getItemId());
-                detailResponse.setTagNo(detail.getTagNo());
                 detailResponse.setDuration(detail.getDuration());
                 detailResponse.setDescription(detail.getDescription());
                 detailResponse.setRemark(detail.getRemark());
@@ -143,7 +141,6 @@ public class LostFixedAssetMapper {
 //                FixedAssetDto lostFixedAssetDto = validationUtil.getItemById(tenantId, detailRequest.getItemId());
 
                 detail.setItemId(detailRequest.getItemId());
-                detail.setTagNo(detailRequest.getTagNo());
                 detail.setDuration(detailRequest.getDuration());
                 detail.setDescription(detailRequest.getDescription());
                 detail.setRemark(detailRequest.getRemark());

@@ -1,10 +1,15 @@
 package com.saas.inventory.mapper;
 
+import com.saas.inventory.dto.clientDto.DepartmentDto;
+import com.saas.inventory.dto.clientDto.EmployeeDto;
+import com.saas.inventory.dto.clientDto.FixedAssetDto;
 import com.saas.inventory.dto.request.FixedAssetTransfer.FixedAssetTransferRequest;
 import com.saas.inventory.dto.response.FixedAssetTransfer.FixedAssetTransferDetailResponse;
 import com.saas.inventory.dto.response.FixedAssetTransfer.FixedAssetTransferResponse;
 import com.saas.inventory.model.FixedAssetTransfer.FixedAssetTransfer;
 import com.saas.inventory.model.FixedAssetTransfer.FixedAssetTransferDetail;
+import com.saas.inventory.utility.ValidationUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,19 +17,33 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class FixedAssetTransferMapper {
+
+    private final ValidationUtil validationUtil;
+
     public FixedAssetTransfer toEntity(UUID tenantId,FixedAssetTransferRequest request){
+
         FixedAssetTransfer fixedAssetTransfer = new FixedAssetTransfer();
+
+        DepartmentDto department=validationUtil.getDepartmentById(tenantId,request.getDepartmentId());
+        EmployeeDto toEmployee=validationUtil.getEmployeeById(tenantId,request.getTransferToId());
+        EmployeeDto fromEmployee=validationUtil.getEmployeeById(tenantId,request.getTransferFromId());
+
+
         fixedAssetTransfer.setTenantId(tenantId);
         fixedAssetTransfer.setTransferNo(request.getTransferNo());
-        fixedAssetTransfer.setDepartmentId(request.getDepartmentId());
-        fixedAssetTransfer.setTransferToId(request.getTransferToId());
-        fixedAssetTransfer.setTransferFromId(request.getTransferFromId());
+        fixedAssetTransfer.setDepartmentId(department.getId());
+        fixedAssetTransfer.setTransferToId(toEmployee.getId());
+        fixedAssetTransfer.setTransferFromId(fromEmployee.getId());
         fixedAssetTransfer.setTransferType(request.getTransferType());
         if(request.getTransferDetails() != null){
             List<FixedAssetTransferDetail> details = request.getTransferDetails().stream().map(detailReq ->{
                 FixedAssetTransferDetail detail = new FixedAssetTransferDetail();
-                detail.setItemId(detailReq.getItemId());
+
+                FixedAssetDto item=validationUtil.getAssetById(tenantId,detailReq.getItemId());
+
+                detail.setItemId(item.getId());
                 detail.setQuantity(detailReq.getQuantity());
                 detail.setRemark(detailReq.getRemark());
                 detail.setDescription(detailReq.getDescription());
@@ -71,9 +90,15 @@ public class FixedAssetTransferMapper {
         return response;
     }
 
-    public FixedAssetTransfer updateFixedAssetTransfer(FixedAssetTransfer assetTransfer, FixedAssetTransferRequest request) {
+    public FixedAssetTransfer updateFixedAssetTransfer(UUID tenantId,FixedAssetTransfer assetTransfer, FixedAssetTransferRequest request) {
+
+        DepartmentDto department=validationUtil.getDepartmentById(tenantId,request.getDepartmentId());
+        EmployeeDto toEmployee=validationUtil.getEmployeeById(tenantId,request.getTransferToId());
+        EmployeeDto fromEmployee=validationUtil.getEmployeeById(tenantId,request.getTransferFromId());
+
+
         if (request.getDepartmentId() != null) {
-            assetTransfer.setDepartmentId(request.getDepartmentId());
+            assetTransfer.setDepartmentId(department.getId());
         }
 
         if (request.getTransferType() != null) {
@@ -81,17 +106,20 @@ public class FixedAssetTransferMapper {
         }
 
         if (request.getTransferFromId() != null) {
-            assetTransfer.setTransferFromId(request.getTransferFromId());
+            assetTransfer.setTransferFromId(fromEmployee.getId());
         }
 
         if (request.getTransferToId() != null) {
-            assetTransfer.setTransferToId(request.getTransferToId());
+            assetTransfer.setTransferToId(toEmployee.getId());
         }
 
         if (request.getTransferDetails() != null) {
             List<FixedAssetTransferDetail> details = request.getTransferDetails().stream().map(detailReq -> {
                 FixedAssetTransferDetail assetTransferDetail = new FixedAssetTransferDetail();
-                assetTransferDetail.setItemId(detailReq.getItemId());
+
+                FixedAssetDto item = validationUtil.getAssetById(tenantId, detailReq.getItemId());
+
+                assetTransferDetail.setItemId(item.getId());
                 assetTransferDetail.setQuantity(detailReq.getQuantity());
                 assetTransferDetail.setRemark(detailReq.getRemark());
                 assetTransferDetail.setDescription(detailReq.getDescription());

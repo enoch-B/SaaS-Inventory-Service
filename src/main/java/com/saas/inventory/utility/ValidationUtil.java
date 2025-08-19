@@ -42,13 +42,18 @@ public class ValidationUtil {
     private final InventoryBalanceRepository inventoryBalanceRepository;
     private final FixedAssetDisposalRepository fixedAssetDisposalRepository;
     private final StockDisposalRepository stockDisposalRepository;
+    private final DisposableAssetRepository disposableAssetRepository;
 
      private final AuthServiceClient authServiceClient;
      private final  OrganizationServiceClient organizationServiceClient;
      private final  StoreServiceClient storeServiceClient;
      private final FixedAssetServiceClient fixedAssetServiceClient;
      private final EmployeeServiceClient employeeServiceClient;
-    private final DisposableAssetRepository disposableAssetRepository;
+     private final LeaveServiceClient leaveServiceClient;
+     private final ItemServiceClient itemServiceClient;
+
+
+
 
 
     public void validateDrNo(String drNo) {
@@ -137,12 +142,22 @@ public class ValidationUtil {
           }
         }
 
-    public FixedAssetDto getItemById(UUID tenantId, UUID itemId) {
+    public FixedAssetDto getAssetById(UUID tenantId, UUID itemId) {
         try{
             return fixedAssetServiceClient.getAssetById(tenantId,itemId);
         }catch (FeignException.NotFound e){
             throw new ResourceNotFoundException(
                     "Item Not Found with id" + itemId +"----" + e.getMessage());
+        }
+
+    }
+
+    public ItemDto getItemById(UUID tenantId, UUID itemId) {
+        try{
+            return itemServiceClient.getItemById(tenantId, itemId);
+        } catch (FeignException.NotFound e) {
+            throw new ResourceNotFoundException(
+                    "Item Not Found with id: " + itemId + " ---- " + e.getMessage());
         }
 
     }
@@ -156,6 +171,17 @@ public class ValidationUtil {
 
         }
         }
+
+        public BudgetDto getBudgetYearById(UUID tenantId, UUID budgetYearId) {
+            try {
+                return leaveServiceClient.getBudgetYearById(tenantId, budgetYearId);
+            } catch (FeignException.NotFound e) {
+                throw new ResourceNotFoundException("Budget Year not found with id: " + budgetYearId + " ---- " + e.getMessage());
+            }
+        }
+
+
+
 
     public FixedAssetDisposal getFixedAssetDisposalById(UUID tenantId, UUID id) {
         return fixedAssetDisposalRepository.findById(id)

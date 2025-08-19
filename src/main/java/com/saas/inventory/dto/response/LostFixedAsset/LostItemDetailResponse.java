@@ -8,8 +8,6 @@ public class LostItemDetailResponse {
 
     private UUID itemId;
 
-    private String tagNo;    // unique identifier for the item
-
     private String duration;
     private String description;
     private String remark;

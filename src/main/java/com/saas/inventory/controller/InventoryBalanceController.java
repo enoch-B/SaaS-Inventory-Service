@@ -67,10 +67,10 @@ public class InventoryBalanceController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?>updateInventoryBalance(@PathVariable UUID tenantId, @PathVariable UUID id, @RequestBody InventoryBalanceRequest request, @RequestBody InventoryCount count) throws IOException{
+    public ResponseEntity<?>updateInventoryBalance(@PathVariable UUID tenantId, @PathVariable UUID id, @RequestBody InventoryBalanceRequest request) throws IOException{
         permissionEvaluator.updateInventoryBalancePermission(tenantId);
 
-        InventoryBalanceResponse response=inventoryBalanceService.updateInventoryBalance(tenantId,id,request,count);
+        InventoryBalanceResponse response=inventoryBalanceService.updateInventoryBalance(tenantId,id,request);
 
         return ResponseEntity.ok(response);
     }

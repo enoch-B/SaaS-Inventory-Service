@@ -100,7 +100,7 @@ public class LostStockItemService {
     public LostStockItemResponse updateLostStockItem(UUID tenantId, UUID id,LostStockItemRequest request, MultipartFile file) throws IOException {
         LostStockItem existingItem=validationUtil.getLostStockItemById(tenantId,id);
 
-        existingItem= lostStockItemMapper.mapUpdateRequest(request, file, existingItem);
+        existingItem= lostStockItemMapper.mapUpdateRequest(tenantId,request, file, existingItem);
 
         LostStockItem updated=lostStockItemRepository.save(existingItem);
 

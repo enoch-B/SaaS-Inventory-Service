@@ -24,8 +24,6 @@ public class LostItemDetail {
     private UUID itemId;         // from item-service
 
 
-    private String tagNo;
-
 
 
     @Column(nullable = false)

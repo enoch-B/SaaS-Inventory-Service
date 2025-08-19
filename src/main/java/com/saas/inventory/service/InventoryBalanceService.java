@@ -65,10 +65,14 @@ public class InventoryBalanceService {
     }
 
 
-    public InventoryBalanceResponse updateInventoryBalance(UUID tenantId, UUID id,InventoryBalanceRequest request,InventoryCount count) {
+    public InventoryBalanceResponse updateInventoryBalance(UUID tenantId, UUID id,InventoryBalanceRequest request) {
+
+        InventoryCount inventoryCount = inventoryCountRepository.findById(request.getInventoryCountId())
+                .orElseThrow(() -> new RuntimeException("Inventory Count not found"));
+
         InventoryBalance inventoryBalance=validationUtil.getInventoryBalanceById(tenantId,id);
 
-        inventoryBalance=inventoryBalanceMapper.mapUpdateRequest(inventoryBalance,request,count);
+        inventoryBalance=inventoryBalanceMapper.mapUpdateRequest(tenantId,inventoryBalance,request,inventoryCount);
 
         InventoryBalance updated=inventoryBalanceRepository.save(inventoryBalance);
 

@@ -44,7 +44,7 @@ public class StockDisposalMapper {
             List<StockDisposalDetail> details = request.getStockDisposalDetails().stream().map(detailRequest -> {
                 StockDisposalDetail detail = new StockDisposalDetail();
 
-                FixedAssetDto item=validationUtil.getItemById(tenantId,detailRequest.getItemId());
+                FixedAssetDto item=validationUtil.getAssetById(tenantId,detailRequest.getItemId());
 
                 detail.setItemId(item.getId());
                 detail.setDisposalMethod(detailRequest.getDisposalMethod());
@@ -153,7 +153,7 @@ public class StockDisposalMapper {
                     .map(detailRequest -> {
                         StockDisposalDetail detail = new StockDisposalDetail();
 
-                        FixedAssetDto item = validationUtil.getItemById(tenantId, detailRequest.getItemId());
+                        FixedAssetDto item = validationUtil.getAssetById(tenantId, detailRequest.getItemId());
 
                         detail.setItemId(item.getId());
                         detail.setDisposalMethod(detailRequest.getDisposalMethod());

@@ -1,11 +1,14 @@
 package com.saas.inventory.mapper;
 
+import com.saas.inventory.dto.clientDto.FixedAssetDto;
 import com.saas.inventory.dto.request.InventoryBalance.InventoryBalanceRequest;
 import com.saas.inventory.dto.response.InventoryBalance.InventoryBalanceItemResponse;
 import com.saas.inventory.dto.response.InventoryBalance.InventoryBalanceResponse;
 import com.saas.inventory.model.InventoryBalance.InventoryBalance;
 import com.saas.inventory.model.InventoryBalance.InventoryBalanceItem;
 import com.saas.inventory.model.InventoryCountSheet.InventoryCount;
+import com.saas.inventory.utility.ValidationUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -14,7 +17,11 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class InventoryBalanceMapper {
+
+    private final ValidationUtil validationUtil;
+
 
     public InventoryBalance mapToEntity(UUID tenantId, InventoryBalanceRequest request, InventoryCount count) {
         InventoryBalance inventoryBalance = new InventoryBalance();
@@ -77,9 +84,10 @@ public class InventoryBalanceMapper {
         return response;
     }
 
-    public InventoryBalance mapUpdateRequest(InventoryBalance existing,
+    public InventoryBalance mapUpdateRequest(UUID tenantId, InventoryBalance existing,
                                                               InventoryBalanceRequest request,
                                                               InventoryCount inventoryCount) {
+
 
         if (inventoryCount != null) {
             existing.setInventoryCount(inventoryCount);
@@ -92,6 +100,9 @@ public class InventoryBalanceMapper {
         if (request.getInventoryBalanceItemRequest() != null) {
             List<InventoryBalanceItem> updatedItems = request.getInventoryBalanceItemRequest().stream().map(itemRequest -> {
                 InventoryBalanceItem item = new InventoryBalanceItem();
+
+//                FixedAssetDto asset=validationUtil.getItemById(tenantId,itemRequest.getItemId());
+
                 item.setItemId(itemRequest.getItemId());
                 item.setBinBalance(itemRequest.getBinBalance());
                 item.setQuantity(itemRequest.getQuantity());
