@@ -29,13 +29,15 @@ public class FixedAssetDisposalMapper {
     public FixedAssetDisposal toEntity(DisposableAsset disposableAsset, UUID tenantId, FixedAssetDisposalRequest request, MultipartFile file)
     throws IOException {
         FixedAssetDisposal assetDisposal = new FixedAssetDisposal();
-        StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
+//        StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
 
         assetDisposal.setTenantId(tenantId);
-        assetDisposal.setStoreId(store.getId());
+        assetDisposal.setStoreId(request.getStoreId());
         assetDisposal.setFixedAssetDisposalNo(request.getFixedAssetDisposalNo());
+
         assetDisposal.setApprovedDate(request.getApprovedDate());
         assetDisposal.setProposedDate(request.getProposedDate());
+        assetDisposal.setDisposalStatus(disposableAsset.getDisposalStatus());
         assetDisposal.setDisposableAsset(disposableAsset);
 
 
@@ -45,9 +47,9 @@ public class FixedAssetDisposalMapper {
             List<FixedAssetDisposalDetail> details = request.getDisposalDetails().stream().map(detailRequest -> {
                 FixedAssetDisposalDetail detail = new FixedAssetDisposalDetail();
 
-                FixedAssetDto asset=validationUtil.getAssetById(tenantId,detailRequest.getItemId());
+//                FixedAssetDto asset=validationUtil.getAssetById(tenantId,detailRequest.getItemId());
 
-                detail.setItemId(asset.getId());
+                detail.setItemId(detailRequest.getItemId());
                 detail.setItemLocation(detailRequest.getItemLocation());
                 detail.setDisposalMethod(detailRequest.getDisposalMethod());
                 detail.setFixedAssetDisposal(assetDisposal);
@@ -102,7 +104,6 @@ public class FixedAssetDisposalMapper {
             List<FixedAssetDisposalDetailResponse> details = assetDisposal.getDisposalDetails().stream().map(detail -> {
                 FixedAssetDisposalDetailResponse detailResponse = new FixedAssetDisposalDetailResponse();
                 detailResponse.setItemId(detail.getItemId());
-                detailResponse.setTagNumber(detail.getTagNumber());
                 detailResponse.setItemLocation(detail.getItemLocation());
                 detailResponse.setDisposalMethod(detail.getDisposalMethod());
 
@@ -120,10 +121,10 @@ public class FixedAssetDisposalMapper {
     public FixedAssetDisposal updateEntity(UUID tenantId, FixedAssetDisposal assetDisposal, FixedAssetDisposalRequest request, MultipartFile file, DisposableAsset disposableAsset)
     throws IOException{
 
-        StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
+//        StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
 
         if (request.getStoreId() != null) {
-            assetDisposal.setStoreId(store.getId());
+            assetDisposal.setStoreId(request.getStoreId());
         }
 
         if (request.getApprovedDate() != null) {
@@ -139,9 +140,9 @@ public class FixedAssetDisposalMapper {
             List<FixedAssetDisposalDetail> details = request.getDisposalDetails().stream().map(detailRequest -> {
                 FixedAssetDisposalDetail detail = new FixedAssetDisposalDetail();
 
-                FixedAssetDto asset=validationUtil.getAssetById(tenantId,detailRequest.getItemId());
+//                FixedAssetDto asset=validationUtil.getAssetById(tenantId,detailRequest.getItemId());
 
-                detail.setItemId(asset.getId());
+                detail.setItemId(detailRequest.getItemId());
                 detail.setItemLocation(detailRequest.getItemLocation());
                 detail.setDisposalMethod(detailRequest.getDisposalMethod());
                 detail.setFixedAssetDisposal(assetDisposal); // Link back to parent

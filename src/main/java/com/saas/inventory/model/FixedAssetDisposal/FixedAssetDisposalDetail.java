@@ -17,8 +17,6 @@ public class FixedAssetDisposalDetail {
 
     private UUID itemId; // from asset-service
 
-    private String tagNumber; // unique identifier for the asset
-
 
 
     @Column(nullable = false)

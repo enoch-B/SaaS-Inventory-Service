@@ -25,12 +25,7 @@ public class FixedAssetDisposalResponse extends BaseResponse {
     private String fileType;
     private byte[] fileData; // Binary data of the attached file
 
-
-    // Values from DisposableAsset
-    private UUID disposableAssetId;
-    private String disposableNo;
-    private DisposalStatus disposalStatus;
-
+    private DisposalStatus disposalStatus; // Status of the disposal (e.g., PENDING, APPROVED, REJECTED)
     private List<FixedAssetDisposalDetailResponse> disposalDetailResponses; // List of details related to the disposal
 
 }
