@@ -89,4 +89,13 @@ public class FixedAssetDisposalController {
 
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteFixedAssetDisposal(@PathVariable UUID tenantId,
+                                                      @PathVariable UUID id) {
+        // Check permissions for deleting fixed asset disposal
+        permissionEvaluator.deleteFixedAssetDisposalPermission(tenantId);
+        fixedAssetDisposalService.deleteFixedAssetDisposal(tenantId, id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

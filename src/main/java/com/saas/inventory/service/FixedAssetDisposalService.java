@@ -48,12 +48,14 @@ public class FixedAssetDisposalService {
                 nextNumber = 1;
             }
         }
-        return String.format("FixedAssetDisposalNO-%03d/%d", nextNumber, currentYear);
+        return String.format("DisposalNO-%03d/%d", nextNumber, currentYear);
     }
 
     public FixedAssetDisposalResponse addFixedAssetDisposal(UUID tenantId, FixedAssetDisposalRequest request, MultipartFile file) throws IOException {
 
         DisposableAsset disposableAsset = validationUtil.getDisposableAssetById(tenantId, request.getDisposableAssetId());
+
+        // Check if the asset is already disposed
 
 
         FixedAssetDisposal entity = fixedAssetDisposalMapper.toEntity(disposableAsset,tenantId, request, file);
@@ -98,4 +100,9 @@ public class FixedAssetDisposalService {
     }
 
 
+    public void deleteFixedAssetDisposal(UUID tenantId, UUID id) {
+        FixedAssetDisposal fixedAssetDisposal= validationUtil.getFixedAssetDisposalById(tenantId, id);
+
+        fixedAssetDisposalRepository.delete(fixedAssetDisposal);
+    }
 }
