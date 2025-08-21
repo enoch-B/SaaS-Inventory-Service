@@ -95,6 +95,9 @@ public class PermissionEvaluator {
     public void getAllFixedAssetDisposalPermission(UUID tenantId) {
         checkPermission(tenantId, ResourceName.GET_ALL_FIXED_ASSET_DISPOSAL);
     }
+    public void deleteFixedAssetDisposalPermission(UUID tenantId) {
+        checkPermission(tenantId, ResourceName.DELETE_FIXED_ASSET_DISPOSAL);
+    }
 
 
      /* Need Assessment Permission */
