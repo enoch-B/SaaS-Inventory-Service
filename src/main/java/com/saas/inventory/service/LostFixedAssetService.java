@@ -6,6 +6,7 @@ import com.saas.inventory.exception.ResourceNotFoundException;
 import com.saas.inventory.mapper.LostFixedAssetMapper;
 import com.saas.inventory.model.LostFixedAsset.LostFixedAsset;
 import com.saas.inventory.repository.LostFixedAsset.LostFixedAssetRepository;
+import com.saas.inventory.utility.FileUtil;
 import com.saas.inventory.utility.ValidationUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+
+import static java.util.Locale.filter;
 
 @Service
 @RequiredArgsConstructor
@@ -119,5 +122,16 @@ public class LostFixedAssetService {
                 .orElseThrow(()-> new ResourceNotFoundException("Item Not Found"));
 
         return lostFixedAssetMapper.toResponse(lostFixedAsset);
+    }
+
+    public byte[] downloadLostFixedAssetFile(UUID tenantId, UUID lostFixedAssetId) {
+    LostFixedAsset lostFixedAsset=validationUtil.getLostFixedAssetById(tenantId,lostFixedAssetId);
+
+     byte[] fileBytes= FileUtil.decompressFile(lostFixedAsset.getFileBytes());
+    if (fileBytes == null || fileBytes.length == 0) {
+        throw new ResourceNotFoundException("File not found for the given Lost Fixed Asset ID: " + lostFixedAssetId);
+
+    }
+    return fileBytes;
     }
 }

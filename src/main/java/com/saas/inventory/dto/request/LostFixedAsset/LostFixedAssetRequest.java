@@ -28,15 +28,6 @@ public class LostFixedAssetRequest {
     @NotNull(message = "Registration date is required")
     private LocalDate registrationDate;
 
-    // File data fields -
-    @NotBlank(message = "File name is required")
-    private String fileName;
-
-    @NotBlank(message = "File type is required")
-    private String fileType;
-
-    @NotNull(message = "File data is required")
-    private byte[] data;
 
     @NotNull(message = "Lost item details must not be null")
     @Size(min = 1, message = "At least one lost item detail is required")

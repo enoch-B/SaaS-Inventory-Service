@@ -32,17 +32,17 @@ public class LostStockItemMapper {
                                      LostStockItemRequest request,
                                      MultipartFile file) throws IOException {
 
-        DepartmentDto department=validationUtil.getDepartmentById(tenantId, request.getDepartmentId());
-//        Region region = validationUtil.getRegionById(tenantId, request.getRegionId());
-         StoreDto store = validationUtil.getStoreById(tenantId, request.getStoreId());
+//        DepartmentDto department=validationUtil.getDepartmentById(tenantId, request.getDepartmentId());
+////        Region region = validationUtil.getRegionById(tenantId, request.getRegionId());
+//         StoreDto store = validationUtil.getStoreById(tenantId, request.getStoreId());
 
 
         LostStockItem lostStockItem = new LostStockItem();
         lostStockItem.setTenantId(tenantId);
         lostStockItem.setLostStockItemNo(request.getLostStockItemNo());
         lostStockItem.setRegionId(request.getRegionId());
-        lostStockItem.setStoreId(store.getId());
-        lostStockItem.setDepartmentId(department.getId());
+        lostStockItem.setStoreId(request.getStoreId());
+        lostStockItem.setDepartmentId(request.getDepartmentId());
         lostStockItem.setStatus(request.getStatus());
         lostStockItem.setRegistrationDate(request.getRegistrationDate());
         lostStockItem.setCommitteeId(request.getCommitteeId());

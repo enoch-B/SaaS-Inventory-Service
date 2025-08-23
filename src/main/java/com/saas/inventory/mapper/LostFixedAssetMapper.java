@@ -32,12 +32,13 @@ public class LostFixedAssetMapper {
     throws IOException {
         LostFixedAsset lostFixedAsset = new LostFixedAsset();
 
-        DepartmentDto department =validationUtil.getDepartmentById(tenantId, request.getDepartmentId());
-        StoreDto store =validationUtil.getStoreById(tenantId, request.getStoreId());
+//        DepartmentDto department =validationUtil.getDepartmentById(tenantId, request.getDepartmentId());
+//        StoreDto store =validationUtil.getStoreById(tenantId, request.getStoreId());
 
         lostFixedAsset.setTenantId(tenantId);
-        lostFixedAsset.setStoreId(store.getId());
-        lostFixedAsset.setDepartmentId(department.getId());
+        lostFixedAsset.setStoreId(request.getStoreId());
+        lostFixedAsset.setDepartmentId(request.getDepartmentId());
+
         lostFixedAsset.setLostItemNo(request.getLostItemNo());
         lostFixedAsset.setRegistrationDate(request.getRegistrationDate());
 
@@ -46,9 +47,9 @@ public class LostFixedAssetMapper {
                 LostItemDetail detail = new LostItemDetail();
 
 
-          FixedAssetDto item= validationUtil.getAssetById(tenantId, detailRequest.getItemId());
+//          FixedAssetDto item= validationUtil.getAssetById(tenantId, detailRequest.getItemId());
 
-                detail.setItemId(item.getId());
+                detail.setItemId(detailRequest.getItemId());
                 detail.setDuration(detailRequest.getDuration());
                 detail.setDescription(detailRequest.getDescription());
                 detail.setRemark(detailRequest.getRemark());
@@ -102,8 +103,8 @@ public class LostFixedAssetMapper {
     public LostFixedAsset updateLostFixedAsset(UUID tenantId,LostFixedAsset lostFixedAsset,
                                                LostFixedAssetRequest request,
                                                MultipartFile file) throws IOException {
-        DepartmentDto department = validationUtil.getDepartmentById(tenantId, request.getDepartmentId());
-        StoreDto store = validationUtil.getStoreById(tenantId, request.getStoreId());
+//        DepartmentDto department = validationUtil.getDepartmentById(tenantId, request.getDepartmentId());
+//        StoreDto store = validationUtil.getStoreById(tenantId, request.getStoreId());
 
         if (request.getStoreId() != null) {
             lostFixedAsset.setStoreId(request.getStoreId());
@@ -122,17 +123,7 @@ public class LostFixedAssetMapper {
             lostFixedAsset.setRegistrationDate(request.getRegistrationDate());
         }
 
-        if (request.getFileType() != null) {
-            lostFixedAsset.setFileType(request.getFileType());
-        }
 
-        if (request.getFileName() != null) {
-            lostFixedAsset.setFileName(request.getFileName());
-        }
-
-        if (request.getData() != null) {
-            lostFixedAsset.setFileBytes(request.getData());
-        }
 
         if (request.getLostItemDetails() != null) {
             List<LostItemDetail> details = request.getLostItemDetails().stream().map(detailRequest -> {

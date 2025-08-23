@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +52,29 @@ public class LostFixedAssetController {
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
 
+     @GetMapping("/download-file/{lostFixedAssetId}")
+    public ResponseEntity<byte[]> downloadFile(
+            @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
+            @Parameter(description = "Lost Fixed Asset ID") @PathVariable UUID lostFixedAssetId) throws IOException {
+
+        permissionEvaluator.downloadLostFixedAssetFilePermission(tenantId);
+
+        LostFixedAssetResponse lostFixedAssetResponse = lostFixedAssetService.getLostFixedAssetById(tenantId, lostFixedAssetId);
+
+        if(lostFixedAssetResponse.getFileType()==null || lostFixedAssetResponse.getFileType().isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        MediaType mediaType=MediaType.valueOf(lostFixedAssetResponse.getFileType());
+
+
+        byte[] fileData = lostFixedAssetService.downloadLostFixedAssetFile(tenantId, lostFixedAssetId);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + lostFixedAssetResponse.getFileName() + "\"")
+                .contentType(mediaType)
+                .body(fileData);
+    }
+
     @GetMapping("/get-all")
     public ResponseEntity<Page<LostFixedAssetResponse>> getAllLostFixedAssets(
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
@@ -72,7 +96,7 @@ public class LostFixedAssetController {
         LostFixedAssetResponse response = lostFixedAssetService.getLostFixedAssetById(tenantId, id);
         return ResponseEntity.ok(response);
     }
-    @GetMapping("/get/{LostItemNo}")
+    @GetMapping("/get-by/{LostItemNo}")
     public ResponseEntity<?>getLFAssetByLostItemNo(@PathVariable UUID tenantId,
                                                    @PathVariable String lostItemNo) throws IOException{
 
@@ -86,7 +110,7 @@ public class LostFixedAssetController {
 
 
 
-    @PutMapping(value="/update/{assetId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PutMapping(value="/update/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> updateLostFixedAsset(
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Lost Fixed Asset ID") @PathVariable UUID id,

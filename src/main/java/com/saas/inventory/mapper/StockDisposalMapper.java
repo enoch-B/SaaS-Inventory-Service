@@ -30,11 +30,11 @@ public class StockDisposalMapper {
     public StockDisposal toEntity(UUID tenantId, StockDisposalRequest request, MultipartFile file) throws IOException {
         StockDisposal stockDisposal = new StockDisposal();
 
-        StoreDto storeDto=validationUtil.getStoreById(tenantId,request.getStoreId());
+//        StoreDto storeDto=validationUtil.getStoreById(tenantId,request.getStoreId());
 
 
         stockDisposal.setTenantId(tenantId);
-        stockDisposal.setStoreId(storeDto.getId());
+        stockDisposal.setStoreId(request.getStoreId());
         stockDisposal.setDisposalNo(request.getDisposalNo());
         stockDisposal.setDisposalStatus(request.getDisposalStatus());
         stockDisposal.setProposeDate(request.getProposeDate());
@@ -44,9 +44,9 @@ public class StockDisposalMapper {
             List<StockDisposalDetail> details = request.getStockDisposalDetails().stream().map(detailRequest -> {
                 StockDisposalDetail detail = new StockDisposalDetail();
 
-                FixedAssetDto item=validationUtil.getAssetById(tenantId,detailRequest.getItemId());
+//                FixedAssetDto item=validationUtil.getAssetById(tenantId,detailRequest.getItemId());
 
-                detail.setItemId(item.getId());
+                detail.setItemId(detailRequest.getItemId());
                 detail.setDisposalMethod(detailRequest.getDisposalMethod());
                 detail.setDescription(detailRequest.getDescription());
                 detail.setSellingPrice(detailRequest.getSellingPrice());
@@ -118,10 +118,10 @@ public class StockDisposalMapper {
 
     public StockDisposal mapUpdateRequest(UUID tenantId,StockDisposal existing, StockDisposalRequest request,MultipartFile file) throws IOException {
 
-         StoreDto storeDto=validationUtil.getStoreById(tenantId,request.getStoreId());
+//         StoreDto storeDto=validationUtil.getStoreById(tenantId,request.getStoreId());
 
         if (request.getStoreId() != null) {
-            existing.setStoreId(storeDto.getId());
+            existing.setStoreId(request.getStoreId());
         }
 
         if (request.getDisposalStatus() != null) {
@@ -153,9 +153,9 @@ public class StockDisposalMapper {
                     .map(detailRequest -> {
                         StockDisposalDetail detail = new StockDisposalDetail();
 
-                        FixedAssetDto item = validationUtil.getAssetById(tenantId, detailRequest.getItemId());
+//                        FixedAssetDto item = validationUtil.getAssetById(tenantId, detailRequest.getItemId());
 
-                        detail.setItemId(item.getId());
+                        detail.setItemId(detailRequest.getItemId());
                         detail.setDisposalMethod(detailRequest.getDisposalMethod());
                         detail.setDescription(detailRequest.getDescription());
                         detail.setSellingPrice(detailRequest.getSellingPrice());

@@ -24,16 +24,16 @@ public class NeedAssessmentMapper {
     public NeedAssessment toEntity(UUID tenantId,NeedAssessmentRequest request){
         NeedAssessment entity = new NeedAssessment();
 
-        DepartmentDto department=validationUtil.getDepartmentById(tenantId, request.getDepartmentId());
-        StoreDto store = validationUtil.getStoreById(tenantId, request.getStoreId());
-        BudgetDto budget= validationUtil.getBudgetYearById(tenantId,request.getBudgetYearId());
+//        DepartmentDto department=validationUtil.getDepartmentById(tenantId, request.getDepartmentId());
+//        StoreDto store = validationUtil.getStoreById(tenantId, request.getStoreId());
+//        BudgetDto budget= validationUtil.getBudgetYearById(tenantId,request.getBudgetYearId());
 
 
         entity.setTenantId(tenantId);
-        entity.setStoreId(store.getId());
+        entity.setStoreId(request.getStoreId());
         entity.setPurchaseType(request.getPurchaseType());
-        entity.setBudgetYearId(budget.getId());
-        entity.setDepartmentId(department.getId());
+        entity.setBudgetYearId(request.getBudgetYearId());
+        entity.setDepartmentId(request.getDepartmentId());
 
         if(request.getAssessmentDetail() != null) {
             List<NeedAssessmentDetail> details = request.getAssessmentDetail().stream().map(detailRequest ->{
@@ -87,12 +87,12 @@ public class NeedAssessmentMapper {
 
 
     public NeedAssessment updateNeedAssessmentFromRequest(UUID tenantId,NeedAssessmentRequest request, NeedAssessment needAssessment) throws IOException {
-        DepartmentDto department=validationUtil.getDepartmentById(tenantId, request.getDepartmentId());
-        StoreDto store = validationUtil.getStoreById(tenantId, request.getStoreId());
-        BudgetDto budget= validationUtil.getBudgetYearById(tenantId,request.getBudgetYearId());
+//        DepartmentDto department=validationUtil.getDepartmentById(tenantId, request.getDepartmentId());
+//        StoreDto store = validationUtil.getStoreById(tenantId, request.getStoreId());
+//        BudgetDto budget= validationUtil.getBudgetYearById(tenantId,request.getBudgetYearId());
 
         if (request.getStoreId() != null) {
-            needAssessment.setStoreId(store.getId());
+            needAssessment.setStoreId(request.getStoreId());
         }
 
         if (request.getPurchaseType() != null) {
@@ -100,20 +100,20 @@ public class NeedAssessmentMapper {
         }
 
         if (request.getBudgetYearId() != null) {
-            needAssessment.setBudgetYearId(budget.getId());
+            needAssessment.setBudgetYearId(request.getBudgetYearId());
         }
 
         if (request.getDepartmentId() != null) {
-            needAssessment.setDepartmentId(department.getId());
+            needAssessment.setDepartmentId(request.getDepartmentId());
         }
 
         if (request.getAssessmentDetail() != null) {
             List<NeedAssessmentDetail> details = request.getAssessmentDetail().stream()
                     .map(detailRequest -> {
                         NeedAssessmentDetail detail = new NeedAssessmentDetail();
-                        ItemDto item = validationUtil.getItemById(tenantId, detailRequest.getItemId());
+//                        ItemDto item = validationUtil.getItemById(tenantId, detailRequest.getItemId());
 
-                        detail.setItemId(item.getId());
+                        detail.setItemId(detailRequest.getItemId());
                         detail.setGeneralLedgerId(detailRequest.getGeneralLedger());
                         detail.setBudgetAmount(detailRequest.getBudgetAmount());
                         detail.setNeedAssessment(needAssessment);
