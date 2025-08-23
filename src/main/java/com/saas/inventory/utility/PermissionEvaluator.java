@@ -298,5 +298,7 @@ public class PermissionEvaluator {
     }
 
 
-
+    public void downloadLostFixedAssetFilePermission(UUID tenantId) {
+        checkPermission(tenantId, ResourceName.DOWNLOAD_LOST_FIXED_ASSET_FILE);
+    }
 }
