@@ -37,7 +37,7 @@ public class FixedAssetDisposalMapper {
 
         assetDisposal.setApprovedDate(request.getApprovedDate());
         assetDisposal.setProposedDate(request.getProposedDate());
-        assetDisposal.setDisposalStatus(disposableAsset.getDisposalStatus());
+        assetDisposal.setDisposalStatus(request.getDisposalStatus());
         assetDisposal.setDisposableAsset(disposableAsset);
 
 
@@ -88,6 +88,9 @@ public class FixedAssetDisposalMapper {
         response.setId(assetDisposal.getId());
         response.setTenantId(assetDisposal.getTenantId());
         response.setStoreId(assetDisposal.getStoreId());
+        response.setFixedAssetDisposalNo(assetDisposal.getFixedAssetDisposalNo());
+        response.setDisposalStatus(assetDisposal.getDisposalStatus());
+        response.setDisposableAssetId(assetDisposal.getDisposableAsset() != null ? assetDisposal.getDisposableAsset().getId() : null);
 
         response.setProposedDate(assetDisposal.getProposedDate());
         response.setApprovedDate(assetDisposal.getApprovedDate());

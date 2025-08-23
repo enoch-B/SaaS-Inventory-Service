@@ -18,6 +18,7 @@ public class FixedAssetDisposalResponse extends BaseResponse {
     private String fixedAssetDisposalNo; // Unique identifier for the disposal
 
     private LocalDate approvedDate; // Date when the disposal was approved
+    private UUID disposableAssetId; // Reference to the asset being disposed of
 
     private LocalDate proposedDate;
 
