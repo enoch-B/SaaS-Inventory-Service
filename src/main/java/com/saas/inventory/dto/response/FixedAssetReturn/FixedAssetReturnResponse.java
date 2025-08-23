@@ -14,6 +14,7 @@ public class FixedAssetReturnResponse extends BaseResponse {
 
     private UUID departmentId;
     private UUID storeId;
+    private String assetReturnNo; // Unique return number for tracking
     private UUID returnedById;
     private String returnStatus;
     private LocalDate receivedDate;

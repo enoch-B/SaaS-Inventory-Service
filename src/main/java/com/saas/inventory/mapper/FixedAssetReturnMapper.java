@@ -26,17 +26,17 @@ public class FixedAssetReturnMapper {
     public FixedAssetReturn toEntity(UUID tenantId,FixedAssetReturnRequest request) {
         FixedAssetReturn assetReturn = new FixedAssetReturn();
 
-
-        DepartmentDto department=validationUtil.getDepartmentById(tenantId,request.getDepartmentId());
-        StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
-        EmployeeDto employeeDto=validationUtil.getEmployeeById(tenantId,request.getReturnedById());
+//
+//        DepartmentDto department=validationUtil.getDepartmentById(tenantId,request.getDepartmentId());
+//        StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
+//        EmployeeDto employeeDto=validationUtil.getEmployeeById(tenantId,request.getReturnedById());
 
 
         assetReturn.setTenantId(tenantId);
-        assetReturn.setDepartmentId(department.getId());
-        assetReturn.setStoreId(store.getId());
+        assetReturn.setDepartmentId(request.getDepartmentId());
+        assetReturn.setStoreId(request.getStoreId());
         assetReturn.setAssetReturnNo(request.getAssetReturnNo());
-        assetReturn.setReturnedById(employeeDto.getId());
+        assetReturn.setReturnedById(request.getReturnedById());
         assetReturn.setReturnStatus(request.getReturnStatus());
         assetReturn.setReceivedDate(request.getReceivedDate());
         assetReturn.setReturnedDate(request.getReturnedDate());
@@ -45,9 +45,9 @@ public class FixedAssetReturnMapper {
             List<FixedAssetReturnDetail> details = request.getReturnDetailRequests().stream().map(detailReq -> {
                 FixedAssetReturnDetail detail = new FixedAssetReturnDetail();
 
-                FixedAssetDto fixedAssetDto=validationUtil.getAssetById(tenantId, detailReq.getItemId());
+//                FixedAssetDto fixedAssetDto=validationUtil.getAssetById(tenantId, detailReq.getItemId());
 
-                detail.setItemId(fixedAssetDto.getId());
+                detail.setItemId(detailReq.getItemId());
                 detail.setItemStatus(detailReq.getItemStatus());
                 detail.setDescription(detailReq.getDescription());
                 detail.setFixedAssetReturn(assetReturn); // Link to parent
@@ -64,6 +64,7 @@ public class FixedAssetReturnMapper {
         FixedAssetReturnResponse response = new FixedAssetReturnResponse();
         response.setId(entity.getId());
         response.setTenantId(entity.getTenantId());
+        response.setAssetReturnNo(entity.getAssetReturnNo());
         response.setDepartmentId(entity.getDepartmentId());
         response.setStoreId(entity.getStoreId());
         response.setReturnedById(entity.getReturnedById());
@@ -92,20 +93,20 @@ public class FixedAssetReturnMapper {
 
     public FixedAssetReturn updateFixedAssetReturn(UUID tenantId,FixedAssetReturn assetReturn, FixedAssetReturnRequest request) {
 
-        DepartmentDto department=validationUtil.getDepartmentById(tenantId,request.getDepartmentId());
-        StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
-        EmployeeDto employeeDto=validationUtil.getEmployeeById(tenantId,request.getReturnedById());
+//        DepartmentDto department=validationUtil.getDepartmentById(tenantId,request.getDepartmentId());
+//        StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
+//        EmployeeDto employeeDto=validationUtil.getEmployeeById(tenantId,request.getReturnedById());
 
 
         if (request.getDepartmentId() != null) {
-            assetReturn.setDepartmentId(department.getId());
+            assetReturn.setDepartmentId(request.getDepartmentId());
         }
         if (request.getStoreId() != null) {
-            assetReturn.setStoreId(store.getId());
+            assetReturn.setStoreId(request.getStoreId());
         }
 
         if (request.getReturnedById() != null) {
-            assetReturn.setReturnedById(employeeDto.getId());
+            assetReturn.setReturnedById(request.getReturnedById());
         }
 
         if (request.getReturnStatus() != null) {
@@ -122,9 +123,9 @@ public class FixedAssetReturnMapper {
             List<FixedAssetReturnDetail> details = request.getReturnDetailRequests().stream().map(detailReq -> {
                 FixedAssetReturnDetail detail = new FixedAssetReturnDetail();
 
-                FixedAssetDto fixedAssetDto=validationUtil.getAssetById(tenantId, detailReq.getItemId());
+//                FixedAssetDto fixedAssetDto=validationUtil.getAssetById(tenantId, detailReq.getItemId());
 
-                detail.setItemId(fixedAssetDto.getId());
+                detail.setItemId(detailReq.getItemId());
                 detail.setItemStatus(detailReq.getItemStatus());
                 detail.setDescription(detailReq.getDescription());
                 detail.setFixedAssetReturn(assetReturn);
