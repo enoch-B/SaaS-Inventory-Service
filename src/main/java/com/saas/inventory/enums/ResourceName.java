@@ -30,6 +30,7 @@ public enum ResourceName {
     GET_ALL_FIXED_ASSET_DISPOSAL("Get All Fixed Asset Disposal"),
     GET_FIXED_ASSET_DISPOSAL_BY_DISPOSAL_NO("Get Fixed Asset Disposal By Disposal Number"),
     DELETE_FIXED_ASSET_DISPOSAL("Delete Fixed Asset Disposal"),
+    DOWNLOAD_FIXED_ASSET_DISPOSAL_FILE("Download Fixed Asset Disposal File"),
 
     /*Need Assessment Permission */
     GET_ALL_NEED_ASSESSMENT("Get All Need Assessments"),
@@ -86,6 +87,7 @@ public enum ResourceName {
     GET_LOST_STOCK_ITEM_BY_LOST_STOCK_ITEM_NO("Get Lost Stock Item By Lost Stock Item No"),
     UPDATE_LOST_STOCK_ITEM("Update the lost stock item "),
     DELETE_LOST_STOCK_ITEM("Delete Lost Stock Item"),
+    DOWNLOAD_LOST_STOCK_ITEM_FILE("Download Lost Stock Item File"),
     /*
       Inventory Balance
      */
@@ -104,7 +106,7 @@ public enum ResourceName {
     UPDATE_STOCK_DISPOSAL("Update Stock Disposal"),
     DELETE_STOCK_DISPOSAL("Delete Stock Disposal"),
     ADD_STOCK_DISPOSAL("Add Stock Disposal"),
-    ;
+    DOWNLOAD_STOCK_DISPOSAL_FILE("Download Stock Disposal File");
 
     private final String value;
 

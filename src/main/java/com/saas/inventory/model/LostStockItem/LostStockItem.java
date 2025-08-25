@@ -26,7 +26,7 @@ public class LostStockItem extends Base {
 
     private LocalDate registrationDate;
 
-    private UUID regionId;       // FK to region-service (or static lookup)
+    private String region;       // FK to region-service (or static lookup)
     private UUID departmentId;   // FK to HR/department service
     private UUID storeId;        // FK to store-service
 

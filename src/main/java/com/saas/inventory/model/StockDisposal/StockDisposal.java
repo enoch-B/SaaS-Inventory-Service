@@ -2,6 +2,7 @@ package com.saas.inventory.model.StockDisposal;
 
 
 
+import com.saas.inventory.enums.DisposalStatus;
 import com.saas.inventory.model.Base;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -24,7 +25,8 @@ public class StockDisposal extends Base {
     private String disposalNo;
 
     @Column(nullable = false)
-    private String disposalStatus;
+    @Enumerated(EnumType.STRING)
+    private DisposalStatus disposalStatus;
 
     @Column(nullable = false)
     private LocalDate proposeDate;

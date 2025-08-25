@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -64,6 +65,7 @@ public class FixedAssetDisposalController {
         return ResponseEntity.ok(response);
     }
 
+
     @GetMapping("/get-all")
     public ResponseEntity<?> getAllFixedAssetDisposal(
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
@@ -88,6 +90,29 @@ public class FixedAssetDisposalController {
         return ResponseEntity.ok(response);
 
     }
+    @GetMapping(value = "/download-document/{fixedAssetDisposalId}")
+    public ResponseEntity<?> downloadFixedAssetDisposalFileById(
+            @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
+            @Parameter(description = "Disposal ID") @PathVariable UUID fixedAssetDisposalId
+    ) {
+
+        permissionEvaluator.downloadFixedAssetDisposalFilePermission(tenantId);
+        FixedAssetDisposalResponse response = fixedAssetDisposalService.getFixedAssetDisposalById(tenantId, fixedAssetDisposalId);
+        if (response.getFileType() == null || response.getFileType().isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        MediaType mediaType = MediaType.valueOf(response.getFileType());
+
+        byte[] FileBytes = fixedAssetDisposalService.getFixedAssetDisposalFileById(tenantId, fixedAssetDisposalId);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + response.getFileName() + "\"")
+                .contentType(mediaType)
+                .body(FileBytes);
+    }
+
+
+
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteFixedAssetDisposal(@PathVariable UUID tenantId,

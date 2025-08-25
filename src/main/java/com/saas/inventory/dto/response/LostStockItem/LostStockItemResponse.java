@@ -22,7 +22,7 @@ public class LostStockItemResponse extends BaseResponse {
 
     private LocalDate registrationDate;
 
-    private UUID regionId;
+    private String region;
     private UUID departmentId;
     private UUID storeId;
 

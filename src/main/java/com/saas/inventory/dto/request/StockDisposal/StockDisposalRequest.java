@@ -1,5 +1,8 @@
 package com.saas.inventory.dto.request.StockDisposal;
 
+import com.saas.inventory.enums.DisposalStatus;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -20,7 +23,8 @@ public class StockDisposalRequest {
     private String disposalNo;
 
     @NotNull(message = "Disposal status is required")
-    private String disposalStatus;
+    @Enumerated(EnumType.STRING)
+    private DisposalStatus disposalStatus;
 
     @NotNull(message = "Propose date is required")
     private LocalDate proposeDate;
@@ -28,15 +32,6 @@ public class StockDisposalRequest {
     @NotNull(message = "Approved date is required")
     private LocalDate approvedDate;
 
-
-    @NotNull(message = "File name is required")
-    private String fileName;
-
-    @NotNull(message = "File type is required")
-    private String fileType;
-
-    @NotNull(message = "File data is required")
-    private byte[] fileBytes;
 
     @NotNull(message = "Stock disposal details must not be null")
     @Size(min = 1, message = "At least one stock disposal detail is required")

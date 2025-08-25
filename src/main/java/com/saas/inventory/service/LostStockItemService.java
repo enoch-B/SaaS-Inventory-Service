@@ -7,6 +7,7 @@ import com.saas.inventory.exception.ResourceNotFoundException;
 import com.saas.inventory.mapper.LostStockItemMapper;
 import com.saas.inventory.model.LostStockItem.LostStockItem;
 import com.saas.inventory.repository.LostStockItem.LostStockItemRepository;
+import com.saas.inventory.utility.FileUtil;
 import com.saas.inventory.utility.ValidationUtil;
 
 import jakarta.validation.Valid;
@@ -114,6 +115,18 @@ public class LostStockItemService {
 
         return lostStockItemMapper.toResponse(lostStockItem);
 
+
+    }
+
+    public byte[] downloadLostStockItemFileById(UUID tenantId, UUID lostStockId) {
+            LostStockItem lostStockItem=validationUtil.getLostStockItemById(tenantId,lostStockId);
+
+            byte[] fileBytes= FileUtil.decompressFile(lostStockItem.getFileBytes());
+            if(fileBytes.length==0){
+                throw new ResourceNotFoundException("File not found");
+            }
+
+            return fileBytes;
 
     }
 }

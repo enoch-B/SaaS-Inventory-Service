@@ -70,7 +70,7 @@ public class LostFixedAssetController {
         byte[] fileData = lostFixedAssetService.downloadLostFixedAssetFile(tenantId, lostFixedAssetId);
 
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + lostFixedAssetResponse.getFileName() + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"lost_fixed_Asset_" + lostFixedAssetResponse.getFileName() + "\"")
                 .contentType(mediaType)
                 .body(fileData);
     }

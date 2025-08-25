@@ -136,18 +136,6 @@ public class StockDisposalMapper {
             existing.setApprovedDate(request.getApprovedDate());
         }
 
-        if (request.getFileName() != null) {
-            existing.setFileName(request.getFileName());
-        }
-
-        if (request.getFileType() != null) {
-            existing.setFileType(request.getFileType());
-        }
-
-        if (request.getFileBytes() != null) {
-            existing.setFileBytes(request.getFileBytes());
-        }
-
         if (request.getStockDisposalDetails() != null) {
             List<StockDisposalDetail> details = request.getStockDisposalDetails().stream()
                     .map(detailRequest -> {

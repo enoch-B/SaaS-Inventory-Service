@@ -128,7 +128,7 @@ public class LostFixedAssetService {
     LostFixedAsset lostFixedAsset=validationUtil.getLostFixedAssetById(tenantId,lostFixedAssetId);
 
      byte[] fileBytes= FileUtil.decompressFile(lostFixedAsset.getFileBytes());
-    if (fileBytes == null || fileBytes.length == 0) {
+    if (fileBytes.length == 0) {
         throw new ResourceNotFoundException("File not found for the given Lost Fixed Asset ID: " + lostFixedAssetId);
 
     }

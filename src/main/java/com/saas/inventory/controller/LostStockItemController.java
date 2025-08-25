@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +50,9 @@ public class LostStockItemController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+
+
+
     @GetMapping("/get-all")
     public ResponseEntity<Page<LostStockItemResponse>> getAllLostStockItem(
             @Parameter(description = "Tenant ID",required = true) @PathVariable UUID tenantId,
@@ -60,7 +64,7 @@ public class LostStockItemController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/get-by-id/{id}")
     public ResponseEntity<?> getLostStockItemById(
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Lost Stock Item ID") @PathVariable UUID id) {
@@ -70,7 +74,7 @@ public class LostStockItemController {
         LostStockItemResponse response = lostStockItemService.getLostStockItemById(tenantId, id);
         return ResponseEntity.ok(response);
     }
-    @GetMapping("/get/{LostStockItemNo}")
+    @GetMapping("/get-by/{LostStockItemNo}")
 
     public ResponseEntity<?> getLostStockItemByLostStockItemNo(@PathVariable UUID tenantId, @PathVariable String lostStockItemNo){
 
@@ -80,6 +84,25 @@ public class LostStockItemController {
 
         return ResponseEntity.ok(response);
 
+    }
+    @GetMapping("/download-file/{lostStockId}")
+    public ResponseEntity<byte[]> downloadLostStockItemFile(
+            @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
+            @Parameter(description = "Lost Stock Item ID") @PathVariable UUID lostStockId) {
+
+        permissionEvaluator.downloadLostStockItemFilePermission(tenantId);
+         LostStockItemResponse response = lostStockItemService.getLostStockItemById(tenantId, lostStockId);
+
+         if(response.getFileType()==null || response.getFileType().isEmpty()){
+             return ResponseEntity.noContent().build();
+         }
+         MediaType mediaType=MediaType.valueOf(response.getFileType());
+            byte[] fileBytes= lostStockItemService.downloadLostStockItemFileById(tenantId, lostStockId);
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + response.getFileName() + "\"")
+                    .contentType(mediaType)
+                    .body(fileBytes);
     }
 
 

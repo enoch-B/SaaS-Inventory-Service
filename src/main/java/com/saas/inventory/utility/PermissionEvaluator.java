@@ -301,4 +301,16 @@ public class PermissionEvaluator {
     public void downloadLostFixedAssetFilePermission(UUID tenantId) {
         checkPermission(tenantId, ResourceName.DOWNLOAD_LOST_FIXED_ASSET_FILE);
     }
+
+    public void downloadLostStockItemFilePermission(UUID tenantId) {
+        checkPermission(tenantId, ResourceName.DOWNLOAD_LOST_STOCK_ITEM_FILE);
+    }
+
+    public void downloadFixedAssetDisposalFilePermission(UUID tenantId) {
+        checkPermission(tenantId, ResourceName.DOWNLOAD_FIXED_ASSET_DISPOSAL_FILE);
+    }
+
+    public void downloadStockDisposalFilePermission(UUID tenantId) {
+        checkPermission(tenantId, ResourceName.DOWNLOAD_STOCK_DISPOSAL_FILE);
+    }
 }

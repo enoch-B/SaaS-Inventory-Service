@@ -39,9 +39,9 @@ public class NeedAssessmentMapper {
             List<NeedAssessmentDetail> details = request.getAssessmentDetail().stream().map(detailRequest ->{
                 NeedAssessmentDetail detail = new NeedAssessmentDetail();
 
-                ItemDto item = validationUtil.getItemById(tenantId, detailRequest.getItemId());
+//                ItemDto item = validationUtil.getItemById(tenantId, detailRequest.getItemId());
 
-                detail.setItemId(item.getId());
+                detail.setItemId(detailRequest.getItemId());
                 detail.setGeneralLedgerId(detailRequest.getGeneralLedger());
                 detail.setBudgetAmount(detailRequest.getBudgetAmount());
                 detail.setNeedAssessment(entity);

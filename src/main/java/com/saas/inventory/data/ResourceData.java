@@ -70,6 +70,8 @@ public class ResourceData {
                         UPDATE_FIXED_ASSET_DISPOSAL.getValue(),null,eventResponse));
         resources.add(resourceMapper.mapToEntity(ResourceName
                 .DELETE_FIXED_ASSET_DISPOSAL.getValue(), null,eventResponse));
+        resources.add(resourceMapper.mapToEntity(ResourceName
+                .DOWNLOAD_FIXED_ASSET_DISPOSAL_FILE.getValue(), null,eventResponse));
         /* Fixed Asset Return */
         resources.add(resourceMapper.mapToEntity(ResourceName.ADD_FIXED_ASSET_RETURN.getValue(),null,eventResponse));
         resources.add(resourceMapper.mapToEntity(ResourceName.GET_ALL_FIXED_ASSET_RETURN.getValue(),defaultRole,eventResponse));
@@ -116,6 +118,7 @@ public class ResourceData {
         resources.add(resourceMapper.mapToEntity(ResourceName.GET_LOST_STOCK_ITEM_BY_LOST_STOCK_ITEM_NO.getValue(), defaultRole, eventResponse));
         resources.add(resourceMapper.mapToEntity(ResourceName.UPDATE_LOST_STOCK_ITEM.getValue(), null, eventResponse));
         resources.add(resourceMapper.mapToEntity(ResourceName.DELETE_LOST_STOCK_ITEM.getValue(), null, eventResponse));
+        resources.add(resourceMapper.mapToEntity(ResourceName.DOWNLOAD_LOST_STOCK_ITEM_FILE.getValue(), null, eventResponse));
 
         /* Need Assessment */
         resources.add(resourceMapper.mapToEntity(ResourceName.ADD_NEED_ASSESSMENT.getValue(), null, eventResponse));
@@ -131,6 +134,7 @@ public class ResourceData {
         resources.add(resourceMapper.mapToEntity(ResourceName.GET_STOCK_DISPOSAL_BY_DISPOSAL_NO.getValue(), defaultRole, eventResponse));
         resources.add(resourceMapper.mapToEntity(ResourceName.UPDATE_STOCK_DISPOSAL.getValue(), null, eventResponse));
         resources.add(resourceMapper.mapToEntity(ResourceName.DELETE_STOCK_DISPOSAL.getValue(), null, eventResponse));
+        resources.add(resourceMapper.mapToEntity(ResourceName.DOWNLOAD_STOCK_DISPOSAL_FILE.getValue(), null, eventResponse));
 
 
 

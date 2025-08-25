@@ -69,7 +69,7 @@ public class StockDisposalController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("get-by-id/{id}")
     public ResponseEntity<StockDisposalResponse> getStockDisposalById(
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Stock Disposal ID") @PathVariable UUID id) {
@@ -89,6 +89,29 @@ public class StockDisposalController {
         StockDisposalResponse response = stockDisposalService.getStockDisposalBySDNumber(tenantId, disposalNumber);
         return ResponseEntity.ok(response);
     }
+
+     @GetMapping("download-File/{stockDisposalId}")
+     public ResponseEntity<byte[]> downloadStockDisposalFile(
+             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
+             @Parameter(description = "Stock Disposal ID") @PathVariable UUID stockDisposalId) {
+
+         permissionEvaluator.downloadStockDisposalFilePermission(tenantId);
+
+         StockDisposalResponse response= stockDisposalService.getStockDisposalById(tenantId, stockDisposalId);
+         if (response.getFileType() == null || response.getFileType().isEmpty()) {
+             return ResponseEntity.noContent().build();
+
+            }
+            MediaType mediaType = MediaType.valueOf(response.getFileType());
+
+         byte[] fileBytes = stockDisposalService.downloadStockDisposalFile(tenantId, stockDisposalId);
+         return ResponseEntity.ok()
+                 .contentType(mediaType)
+                 .header("Content-Disposition", "attachment; filename=\"stock_disposal_" + response.getFileName() + "\"")
+                 .body(fileBytes);
+     }
+
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteStockDisposal(

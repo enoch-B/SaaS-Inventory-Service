@@ -1,6 +1,7 @@
 package com.saas.inventory.dto.response.StockDisposal;
 
 import com.saas.inventory.dto.response.BaseResponse;
+import com.saas.inventory.enums.DisposalStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,7 +14,7 @@ import java.util.UUID;
 public class StockDisposalResponse extends BaseResponse {
     private UUID storeId;
     private String disposalNo;
-    private String disposalStatus;
+    private DisposalStatus disposalStatus;
     private LocalDate proposeDate;
     private LocalDate approvedDate;
     private String fileName;

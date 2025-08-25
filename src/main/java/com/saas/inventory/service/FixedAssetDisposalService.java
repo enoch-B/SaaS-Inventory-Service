@@ -8,6 +8,7 @@ import com.saas.inventory.model.DisposalCollection.DisposableAsset;
 import com.saas.inventory.model.FixedAssetDisposal.FixedAssetDisposal;
 import com.saas.inventory.repository.DispoalCollection.DisposableAssetRepository;
 import com.saas.inventory.repository.FixedAssetDisposal.FixedAssetDisposalRepository;
+import com.saas.inventory.utility.FileUtil;
 import com.saas.inventory.utility.ValidationUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -104,5 +105,15 @@ public class FixedAssetDisposalService {
         FixedAssetDisposal fixedAssetDisposal= validationUtil.getFixedAssetDisposalById(tenantId, id);
 
         fixedAssetDisposalRepository.delete(fixedAssetDisposal);
+    }
+
+    public byte[] getFixedAssetDisposalFileById(UUID tenantId, UUID fixedAssetDisposalId) {
+        FixedAssetDisposal fixedAssetDisposal = validationUtil.getFixedAssetDisposalById(tenantId, fixedAssetDisposalId);
+
+        byte[] fileBytes = FileUtil.decompressFile( fixedAssetDisposal.getFileBytes());
+        if (fileBytes.length == 0) {
+            throw new RuntimeException("No file associated with this Fixed Asset Disposal");
+        }
+        return fileBytes;
     }
 }

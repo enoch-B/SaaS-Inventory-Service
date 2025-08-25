@@ -1,9 +1,6 @@
 package com.saas.inventory.mapper;
 
 
-import com.saas.inventory.dto.clientDto.DepartmentDto;
-import com.saas.inventory.dto.clientDto.FixedAssetDto;
-import com.saas.inventory.dto.clientDto.StoreDto;
 import com.saas.inventory.dto.request.LostStockItem.LostStockItemRequest;
 import com.saas.inventory.dto.response.LostStockItem.LostStockItemDetailResponse;
 import com.saas.inventory.dto.response.LostStockItem.LostStockItemResponse;
@@ -16,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.plaf.synth.Region;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -40,7 +36,7 @@ public class LostStockItemMapper {
         LostStockItem lostStockItem = new LostStockItem();
         lostStockItem.setTenantId(tenantId);
         lostStockItem.setLostStockItemNo(request.getLostStockItemNo());
-        lostStockItem.setRegionId(request.getRegionId());
+        lostStockItem.setRegion(request.getRegion());
         lostStockItem.setStoreId(request.getStoreId());
         lostStockItem.setDepartmentId(request.getDepartmentId());
         lostStockItem.setStatus(request.getStatus());
@@ -77,7 +73,7 @@ public class LostStockItemMapper {
         response.setId(lostStockItem.getId());
         response.setTenantId(lostStockItem.getTenantId());
         response.setLostStockItemNo(lostStockItem.getLostStockItemNo());
-        response.setRegionId(lostStockItem.getRegionId());
+        response.setRegion(lostStockItem.getRegion());
         response.setStoreId(lostStockItem.getStoreId());
         response.setDepartmentId(lostStockItem.getDepartmentId());
         response.setStatus(lostStockItem.getStatus());
@@ -131,8 +127,8 @@ public class LostStockItemMapper {
             lostStockItem.setRegistrationDate(request.getRegistrationDate());
         }
 
-        if (request.getRegionId() != null) {
-            lostStockItem.setRegionId(request.getRegionId());
+        if (request.getRegion() != null) {
+            lostStockItem.setRegion(request.getRegion());
         }
 
         if (request.getDepartmentId() != null) {

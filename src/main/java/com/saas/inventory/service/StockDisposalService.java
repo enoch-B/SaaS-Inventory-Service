@@ -6,6 +6,7 @@ import com.saas.inventory.exception.ResourceNotFoundException;
 import com.saas.inventory.mapper.StockDisposalMapper;
 import com.saas.inventory.model.StockDisposal.StockDisposal;
 import com.saas.inventory.repository.StockDisposal.StockDisposalRepository;
+import com.saas.inventory.utility.FileUtil;
 import com.saas.inventory.utility.ValidationUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -90,9 +91,11 @@ public class StockDisposalService {
         return stockDisposalMapper.toResponse(stockDisposal);
     }
 
-    public void deleteStockDisposal(UUID id, UUID uuid) {
+    public void deleteStockDisposal(UUID id, UUID tenantId) {
         StockDisposal existing = stockDisposalRepository.findById(id)
+                .filter(sd->sd.getTenantId().equals(tenantId))
                 .orElseThrow(() -> new RuntimeException("Stock Disposal not found with ID: " + id));
+
         stockDisposalRepository.delete(existing);
     }
 
@@ -101,5 +104,14 @@ public class StockDisposalService {
                 .orElseThrow(() -> new ResourceNotFoundException("Stock Disposal not found with Disposal Number: " + disposalNumber));
 
         return stockDisposalMapper.toResponse(stockDisposal);
+    }
+
+    public byte[] downloadStockDisposalFile(UUID tenantId, UUID stockDisposalId) {
+        StockDisposal stockDisposal = validationUtil.getStockDisposalById(stockDisposalId, tenantId);
+        byte[] fileBytes = FileUtil.compressFile( stockDisposal.getFileBytes());
+        if (fileBytes == null || fileBytes.length == 0) {
+            throw new ResourceNotFoundException("Stock Disposal file is not available");
+        }
+        return fileBytes;
     }
 }
