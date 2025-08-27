@@ -7,7 +7,7 @@ import java.util.UUID;
 @Data
 public class FixedAssetDisposalDetailResponse {
     private UUID itemId;
-    private String tagNumber;
+    private String description;
 
     private String itemLocation;
     private String disposalMethod;

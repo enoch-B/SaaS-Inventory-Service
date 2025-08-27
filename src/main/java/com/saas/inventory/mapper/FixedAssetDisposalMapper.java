@@ -52,6 +52,7 @@ public class FixedAssetDisposalMapper {
                 detail.setItemId(detailRequest.getItemId());
                 detail.setItemLocation(detailRequest.getItemLocation());
                 detail.setDisposalMethod(detailRequest.getDisposalMethod());
+                detail.setDescription(detailRequest.getDescription());
                 detail.setFixedAssetDisposal(assetDisposal);
                 return detail;
 
@@ -109,6 +110,7 @@ public class FixedAssetDisposalMapper {
                 detailResponse.setItemId(detail.getItemId());
                 detailResponse.setItemLocation(detail.getItemLocation());
                 detailResponse.setDisposalMethod(detail.getDisposalMethod());
+                detailResponse.setDescription(detail.getDescription());
 
                 return detailResponse;
             }).collect(toList());
@@ -148,6 +150,7 @@ public class FixedAssetDisposalMapper {
                 detail.setItemId(detailRequest.getItemId());
                 detail.setItemLocation(detailRequest.getItemLocation());
                 detail.setDisposalMethod(detailRequest.getDisposalMethod());
+                detail.setDescription(detailRequest.getDescription());
                 detail.setFixedAssetDisposal(assetDisposal); // Link back to parent
                 return detail;
             }).toList();

@@ -24,4 +24,5 @@ public interface FixedAssetDisposalRepository extends JpaRepository<FixedAssetDi
 
     Page<FixedAssetDisposal> findByTenantId(UUID tenantId, Pageable pageable);
 
+    boolean existsByDisposableAssetId(UUID id);
 }

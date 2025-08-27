@@ -69,7 +69,9 @@ public class FixedAssetDisposalService {
 
 
     public FixedAssetDisposalResponse updateFixedAssetDisposal(UUID tenantId, UUID id, FixedAssetDisposalRequest request, MultipartFile file) throws IOException {
-       DisposableAsset disposableAsset=validationUtil.getDisposableAssetById(tenantId, id);
+
+       DisposableAsset disposableAsset=disposableAssetRepository.findById(request.getDisposableAssetId())
+               .orElseThrow(()-> new RuntimeException("Disposable Asset not found with id: " + request.getDisposableAssetId()));
 
         FixedAssetDisposal existing= validationUtil.getFixedAssetDisposalById(tenantId, id);
 

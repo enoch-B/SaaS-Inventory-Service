@@ -22,6 +22,8 @@ public class FixedAssetDisposalDetail {
     @Column(nullable = false)
     private String itemLocation;
 
+    private String description;
+
 
     @Column(nullable = false)
     private String disposalMethod; // e.g., "Sale", "Donation", "Scrap"
