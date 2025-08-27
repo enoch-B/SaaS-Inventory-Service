@@ -28,24 +28,24 @@ public class DisposableAssetMapper {
     throws IOException {
         DisposableAsset disposableAsset = new DisposableAsset();
 
-        DepartmentDto department=validationUtil.getDepartmentById(tenantId,request.getDepartmentId());
-        StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
+//        DepartmentDto department=validationUtil.getDepartmentById(tenantId,request.getDepartmentId());
+//        StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
 
         disposableAsset.setTenantId(tenantId);
         disposableAsset.setDisposableType(request.getDisposableType());
         disposableAsset.setDisposalStatus(request.getDisposalStatus());
         disposableAsset.setDrNo(request.getDrNo());
-        disposableAsset.setDepartmentId(department.getId());
-        disposableAsset.setStoreId(store.getId());
+        disposableAsset.setDepartmentId(request.getDepartmentId());
+        disposableAsset.setStoreId(request.getStoreId());
         disposableAsset.setRequisitionDate(request.getRequisitionDate());
 
         if (request.getDisposableFixedAssetDetails() != null) {
             List<DisposableFixedAssetDetail> details = request.getDisposableFixedAssetDetails().stream().map(detailRequest -> {
                 DisposableFixedAssetDetail detail = new DisposableFixedAssetDetail();
 
-                ItemDto item= validationUtil.getItemById(tenantId, detailRequest.getItemId());
+//                ItemDto item= validationUtil.getItemById(tenantId, detailRequest.getItemId());
 
-                detail.setItemId(item.getId());
+                detail.setItemId(detailRequest.getItemId());
                 detail.setBatchNo(detailRequest.getBatchNo());
                 detail.setDescription(detailRequest.getDescription());
                 detail.setExpirationDate(detailRequest.getExpirationDate());
@@ -102,8 +102,8 @@ public class DisposableAssetMapper {
 
     public void updateDisposableAssetFromRequest(UUID tenantID,DisposableAssetRequest disposableAssetRequest, DisposableAsset disposableAsset) {
 
-        DepartmentDto department = validationUtil.getDepartmentById(tenantID, disposableAssetRequest.getDepartmentId());
-        StoreDto store = validationUtil.getStoreById(tenantID, disposableAssetRequest.getStoreId());
+//        DepartmentDto department = validationUtil.getDepartmentById(tenantID, disposableAssetRequest.getDepartmentId());
+//        StoreDto store = validationUtil.getStoreById(tenantID, disposableAssetRequest.getStoreId());
 
 
         if (disposableAssetRequest.getDisposableType() != null)
@@ -116,10 +116,10 @@ public class DisposableAssetMapper {
             disposableAsset.setDrNo(disposableAssetRequest.getDrNo());
 
         if (disposableAssetRequest.getDepartmentId() != null)
-            disposableAsset.setDepartmentId(department.getId());
+            disposableAsset.setDepartmentId(disposableAssetRequest.getDepartmentId());
 
         if (disposableAssetRequest.getStoreId() != null)
-            disposableAsset.setStoreId(store.getId());
+            disposableAsset.setStoreId(disposableAssetRequest.getStoreId());
 
         if (disposableAssetRequest.getRequisitionDate() != null)
             disposableAsset.setRequisitionDate(disposableAssetRequest.getRequisitionDate());
@@ -130,10 +130,10 @@ public class DisposableAssetMapper {
                     .stream()
                     .map(detailRequest -> {
                         DisposableFixedAssetDetail detail = new DisposableFixedAssetDetail();
+//
+//                        FixedAssetDto asset = validationUtil.getAssetById(tenantID, detailRequest.getItemId());
 
-                        FixedAssetDto asset = validationUtil.getAssetById(tenantID, detailRequest.getItemId());
-
-                        detail.setItemId(asset.getId());
+                        detail.setItemId(detailRequest.getItemId());
                         detail.setBatchNo(detailRequest.getBatchNo());
                         detail.setDescription(detailRequest.getDescription());
                         detail.setExpirationDate(detailRequest.getExpirationDate());

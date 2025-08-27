@@ -2,11 +2,13 @@ package com.saas.inventory.service;
 
 import com.saas.inventory.dto.request.DisposableAsset.DisposableAssetRequest;
 import com.saas.inventory.dto.response.DiposalCollection.DisposableAssetResponse;
+import com.saas.inventory.exception.ForeignKeyException;
 import com.saas.inventory.mapper.DisposableAssetMapper;
 import com.saas.inventory.model.DisposalCollection.DisposableAsset;
 import com.saas.inventory.model.DisposalCollection.DisposableFixedAssetDetail;
 import com.saas.inventory.repository.DispoalCollection.DisposableAssetRepository;
 import com.saas.inventory.repository.DispoalCollection.DisposableFixedAssetDetailRepository;
+import com.saas.inventory.repository.FixedAssetDisposal.FixedAssetDisposalRepository;
 import com.saas.inventory.utility.ValidationUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,6 +29,7 @@ public class DisposableAssetService {
 
     private final DisposableAssetRepository disposableAssetRepository;
     private final DisposableFixedAssetDetailRepository disposableFixedAssetDetailRepository;
+    private final FixedAssetDisposalRepository fixedAssetDisposalRepository;
     private final DisposableAssetMapper disposableAssetMapper;
     private final ValidationUtil validationUtil;
 
@@ -114,6 +117,9 @@ public class DisposableAssetService {
                 .filter(da -> da.getTenantId().equals(tenantId))
                 .orElseThrow( () -> new RuntimeException("Disposable Asset Not Found Or tenant mismatch "));
 
+        if (fixedAssetDisposalRepository.existsByDisposableAssetId(id)) {
+            throw new ForeignKeyException("This disposable asset is already used in a disposal record and cannot be deleted.");
+        }
         disposableAssetRepository.delete(disposableAsset);
     }
 
