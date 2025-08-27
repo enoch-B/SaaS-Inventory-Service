@@ -84,4 +84,11 @@ public class GlobalExceptionHandler {
                 .collect(Collectors.toList());
         return ResponseEntity.badRequest().body(errorMessages);
     }
+
+    @ExceptionHandler(ForeignKeyException.class)
+    public ResponseEntity<ApiError> handleForeignKeyException(ForeignKeyException ex) {
+        ApiError error = new ApiError(HttpStatus.CONFLICT.value(), ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+    }
+
 }
