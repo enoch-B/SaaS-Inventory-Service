@@ -26,24 +26,24 @@ public class FixedAssetTransferMapper {
 
         FixedAssetTransfer fixedAssetTransfer = new FixedAssetTransfer();
 
-        DepartmentDto department=validationUtil.getDepartmentById(tenantId,request.getDepartmentId());
-        EmployeeDto toEmployee=validationUtil.getEmployeeById(tenantId,request.getTransferToId());
-        EmployeeDto fromEmployee=validationUtil.getEmployeeById(tenantId,request.getTransferFromId());
+//        DepartmentDto department=validationUtil.getDepartmentById(tenantId,request.getDepartmentId());
+//        EmployeeDto toEmployee=validationUtil.getEmployeeById(tenantId,request.getTransferToId());
+//        EmployeeDto fromEmployee=validationUtil.getEmployeeById(tenantId,request.getTransferFromId());
 
 
         fixedAssetTransfer.setTenantId(tenantId);
         fixedAssetTransfer.setTransferNo(request.getTransferNo());
-        fixedAssetTransfer.setDepartmentId(department.getId());
-        fixedAssetTransfer.setTransferToId(toEmployee.getId());
-        fixedAssetTransfer.setTransferFromId(fromEmployee.getId());
+        fixedAssetTransfer.setDepartmentId(request.getDepartmentId());
+        fixedAssetTransfer.setTransferToId(request.getTransferToId());
+        fixedAssetTransfer.setTransferFromId(request.getTransferFromId());
         fixedAssetTransfer.setTransferType(request.getTransferType());
         if(request.getTransferDetails() != null){
             List<FixedAssetTransferDetail> details = request.getTransferDetails().stream().map(detailReq ->{
                 FixedAssetTransferDetail detail = new FixedAssetTransferDetail();
 
-                FixedAssetDto item=validationUtil.getAssetById(tenantId,detailReq.getItemId());
+//                FixedAssetDto item=validationUtil.getAssetById(tenantId,detailReq.getItemId());
 
-                detail.setItemId(item.getId());
+                detail.setItemId(detailReq.getItemId());
                 detail.setQuantity(detailReq.getQuantity());
                 detail.setRemark(detailReq.getRemark());
                 detail.setDescription(detailReq.getDescription());
@@ -92,13 +92,13 @@ public class FixedAssetTransferMapper {
 
     public FixedAssetTransfer updateFixedAssetTransfer(UUID tenantId,FixedAssetTransfer assetTransfer, FixedAssetTransferRequest request) {
 
-        DepartmentDto department=validationUtil.getDepartmentById(tenantId,request.getDepartmentId());
-        EmployeeDto toEmployee=validationUtil.getEmployeeById(tenantId,request.getTransferToId());
-        EmployeeDto fromEmployee=validationUtil.getEmployeeById(tenantId,request.getTransferFromId());
+//        DepartmentDto department=validationUtil.getDepartmentById(tenantId,request.getDepartmentId());
+//        EmployeeDto toEmployee=validationUtil.getEmployeeById(tenantId,request.getTransferToId());
+//        EmployeeDto fromEmployee=validationUtil.getEmployeeById(tenantId,request.getTransferFromId());
 
 
         if (request.getDepartmentId() != null) {
-            assetTransfer.setDepartmentId(department.getId());
+            assetTransfer.setDepartmentId(request.getDepartmentId());
         }
 
         if (request.getTransferType() != null) {
@@ -106,20 +106,20 @@ public class FixedAssetTransferMapper {
         }
 
         if (request.getTransferFromId() != null) {
-            assetTransfer.setTransferFromId(fromEmployee.getId());
+            assetTransfer.setTransferFromId(request.getTransferFromId());
         }
 
         if (request.getTransferToId() != null) {
-            assetTransfer.setTransferToId(toEmployee.getId());
+            assetTransfer.setTransferToId(request.getTransferToId());
         }
 
         if (request.getTransferDetails() != null) {
             List<FixedAssetTransferDetail> details = request.getTransferDetails().stream().map(detailReq -> {
                 FixedAssetTransferDetail assetTransferDetail = new FixedAssetTransferDetail();
 
-                FixedAssetDto item = validationUtil.getAssetById(tenantId, detailReq.getItemId());
+//                FixedAssetDto item = validationUtil.getAssetById(tenantId, detailReq.getItemId());
 
-                assetTransferDetail.setItemId(item.getId());
+                assetTransferDetail.setItemId(detailReq.getItemId());
                 assetTransferDetail.setQuantity(detailReq.getQuantity());
                 assetTransferDetail.setRemark(detailReq.getRemark());
                 assetTransferDetail.setDescription(detailReq.getDescription());

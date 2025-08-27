@@ -4,7 +4,6 @@ import com.saas.inventory.dto.request.NeedAssessment.NeedAssessmentRequest;
 import com.saas.inventory.dto.response.NeedAssessment.NeedAssessmentResponse;
 import com.saas.inventory.service.NeedAssessmentService;
 import com.saas.inventory.utility.PermissionEvaluator;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -67,7 +66,7 @@ public class NeedAssessmentController {
         return ResponseEntity.ok("Deleted Successfully");
     }
 
-    @PutMapping("/update/{assessmentId}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<NeedAssessmentResponse> updateNeedAssessment(
             @Parameter(description = "Tenant ID") @PathVariable UUID tenantId,
             @Parameter(description = "Need Assessment ID") @PathVariable UUID id,
