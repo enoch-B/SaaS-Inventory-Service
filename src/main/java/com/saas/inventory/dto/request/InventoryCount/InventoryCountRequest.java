@@ -47,7 +47,7 @@ public class InventoryCountRequest {
     @NotNull(message = "Count Date is required")
     private LocalDate countDate;
 
-    @NotNull(message = "Inventory items must not be null")
+     @NotNull(message="inventory count detail must not be null")
     @Size(min = 1, message = "At least one inventory item is required")
     @Valid
     private List<InventoryCountDetailRequest> inventoryItems;

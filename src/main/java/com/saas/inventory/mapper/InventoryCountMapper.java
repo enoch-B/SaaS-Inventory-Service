@@ -27,16 +27,16 @@ public class InventoryCountMapper {
 
 
         InventoryCount inventoryCount = new InventoryCount();
-
-        StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
-        BudgetDto budgetYear=validationUtil.getBudgetYearById(tenantId, request.getBudgetYearId());
+//
+//        StoreDto store=validationUtil.getStoreById(tenantId,request.getStoreId());
+//        BudgetDto budgetYear=validationUtil.getBudgetYearById(tenantId, request.getBudgetYearId());
 
 
 
         inventoryCount.setTenantId(tenantId);
-        inventoryCount.setStoreId(store.getId());
+        inventoryCount.setStoreId(request.getStoreId());
         inventoryCount.setInventoryCountNumber(request.getInventoryCountNumber());
-        inventoryCount.setBudgetYearId(budgetYear.getId());
+        inventoryCount.setBudgetYearId(request.getBudgetYearId());
         inventoryCount.setCountType(request.getCountType());
         inventoryCount.setStoreType(request.getStoreType());
         inventoryCount.setCommitteeId(request.getCommitteeId());
@@ -46,9 +46,9 @@ public class InventoryCountMapper {
             List<InventoryDetail> details = request.getInventoryItems().stream().map(itemRequest -> {
                 InventoryDetail inventoryDetail = new InventoryDetail();
 
-                ItemDto item= validationUtil.getItemById(tenantId, itemRequest.getItemId());
+//                ItemDto item= validationUtil.getItemById(tenantId, itemRequest.getItemId());
 
-                inventoryDetail.setItemId(item.getId());
+                inventoryDetail.setItemId(itemRequest.getItemId());
                 inventoryDetail.setQuantity(itemRequest.getQuantity());
                 inventoryDetail.setRemark(itemRequest.getRemark());
                 inventoryDetail.setInventoryCount(inventoryCount);
@@ -95,15 +95,15 @@ public class InventoryCountMapper {
     public InventoryCount mapUpdateRequest(UUID tenantId,InventoryCount inventoryCount,
                                            InventoryCountRequest request) {
 
-        StoreDto store=validationUtil.getStoreById(tenantId, request.getStoreId());
-        BudgetDto budgetYear=validationUtil.getBudgetYearById(tenantId, request.getBudgetYearId());
+//        StoreDto store=validationUtil.getStoreById(tenantId, request.getStoreId());
+//        BudgetDto budgetYear=validationUtil.getBudgetYearById(tenantId, request.getBudgetYearId());
 
         if (request.getStoreId() != null) {
-            inventoryCount.setStoreId(store.getId());
+            inventoryCount.setStoreId(request.getStoreId());
         }
 
         if (request.getBudgetYearId() != null) {
-            inventoryCount.setBudgetYearId(budgetYear.getId());
+            inventoryCount.setBudgetYearId(request.getBudgetYearId());
         }
 
         if (request.getCountType() != null) {
@@ -131,9 +131,9 @@ public class InventoryCountMapper {
                     .map(itemRequest -> {
                         InventoryDetail detail = new InventoryDetail();
 
-                        ItemDto item = validationUtil.getItemById(tenantId, itemRequest.getItemId());
+//                        ItemDto item = validationUtil.getItemById(tenantId, itemRequest.getItemId());
 
-                        detail.setItemId(item.getId());
+                        detail.setItemId(itemRequest.getItemId());
                         detail.setQuantity(itemRequest.getQuantity());
                         detail.setRemark(itemRequest.getRemark());
                         detail.setInventoryCount(inventoryCount);

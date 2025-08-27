@@ -6,6 +6,7 @@ import com.saas.inventory.dto.response.InventoryCount.InventoryCountResponse;
 import com.saas.inventory.exception.ResourceNotFoundException;
 import com.saas.inventory.mapper.InventoryCountMapper;
 import com.saas.inventory.model.InventoryCountSheet.InventoryCount;
+import com.saas.inventory.repository.InventoryBalance.InventoryBalanceRepository;
 import com.saas.inventory.repository.InventoryCount.InventoryCountRepository;
 import com.saas.inventory.utility.ValidationUtil;
 import jakarta.transaction.Transactional;
@@ -27,6 +28,7 @@ public class InventoryCountService {
     private final InventoryCountRepository inventoryCountRepository;
     private final ValidationUtil validationUtil;
     private final InventoryCountMapper inventoryCountMapper;
+    private final InventoryBalanceRepository inventoryBalanceRepository;
 
     /**
      * Generates a unique inventory count number per tenant per year.
@@ -111,10 +113,14 @@ public class InventoryCountService {
     /**
      * Delete an inventory count by ID and tenant (hard delete).
      */
+
+    @Transactional
     public void deleteInventoryCount(UUID tenantId, UUID id) {
         InventoryCount count = inventoryCountRepository.findById(id)
                 .filter(ic -> ic.getTenantId().equals(tenantId))
                 .orElseThrow(() -> new RuntimeException("InventoryCount not found or tenant mismatch"));
+
+        inventoryBalanceRepository.deleteByInventoryCountIdAndTenantId(id, tenantId);
 
         inventoryCountRepository.delete(count);
     }
