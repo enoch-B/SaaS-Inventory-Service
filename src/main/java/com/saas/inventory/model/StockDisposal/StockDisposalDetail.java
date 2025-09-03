@@ -27,14 +27,12 @@ public class StockDisposalDetail {
     private DisposalMethod disposalMethod; // e.g., "Sell", "Donate", "Recycle", etc.
 
     @Column(nullable = false)
-    private  String description; // Description of the disposal action
+    private  String description;
+    @Column(nullable = false)
+    private BigDecimal sellingPrice;
 
     @Column(nullable = false)
-    private BigDecimal sellingPrice; // Price at which the item was disposed of, if applicable
-
-
-    @Column(nullable = false)
-    private LocalDate expirationDate; // Date when the item was disposed of
+    private LocalDate expirationDate;
 
 
 

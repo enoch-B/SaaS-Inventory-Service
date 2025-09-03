@@ -16,7 +16,7 @@ public class FixedAssetReturnDetail {
     private UUID id;
 
 
-    private UUID itemId; // from another service
+    private UUID itemId;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -31,5 +31,5 @@ public class FixedAssetReturnDetail {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fixed_asset_return_id")
-    private FixedAssetReturn fixedAssetReturn; // the return this detail belongs to
+    private FixedAssetReturn fixedAssetReturn;
 }

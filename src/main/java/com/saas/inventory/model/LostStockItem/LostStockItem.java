@@ -26,11 +26,11 @@ public class LostStockItem extends Base {
 
     private LocalDate registrationDate;
 
-    private String region;       // FK to region-service (or static lookup)
-    private UUID departmentId;   // FK to HR/department service
-    private UUID storeId;        // FK to store-service
+    private String region;
+    private UUID departmentId;
+    private UUID storeId;
 
-    private UUID committeeId; // FK to committee-service
+    private UUID committeeId;
 
     @Column(name = "member_id")
     private List<UUID> committeeMembersId;

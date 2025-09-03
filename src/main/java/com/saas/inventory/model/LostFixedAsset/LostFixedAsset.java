@@ -20,8 +20,8 @@ public class LostFixedAsset extends Base {
     @Column(nullable = false, unique = true)
     private String lostItemNo;
 
-    private UUID storeId;        // from store-service
-    private UUID   departmentId;   // from org-service
+    private UUID storeId;
+    private UUID   departmentId;
 
 
 

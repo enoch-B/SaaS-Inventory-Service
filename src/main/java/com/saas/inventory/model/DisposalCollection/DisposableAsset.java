@@ -29,7 +29,7 @@ public class DisposableAsset extends Base {
     private LocalDate requisitionDate;
 
     @Enumerated(EnumType.STRING)
-    private DisposalStatus disposalStatus; // PENDING, COMPLETED, etc.
+    private DisposalStatus disposalStatus;
 
 
     @OneToMany(mappedBy = "disposableAsset", cascade = CascadeType.ALL, orphanRemoval = true)

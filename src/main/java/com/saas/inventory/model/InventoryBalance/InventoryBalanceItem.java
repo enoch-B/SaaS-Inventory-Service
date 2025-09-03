@@ -15,7 +15,7 @@ public class InventoryBalanceItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    private UUID itemId;       // Reference to Item from item-service
+    private UUID itemId;
 
     private BigDecimal quantity;
 

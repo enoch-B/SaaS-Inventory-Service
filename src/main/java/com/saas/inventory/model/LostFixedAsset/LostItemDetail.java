@@ -21,7 +21,7 @@ public class LostItemDetail {
     private UUID id;
 
     @Column(nullable = false)
-    private UUID itemId;         // from item-service
+    private UUID itemId;
 
 
 

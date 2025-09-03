@@ -22,10 +22,10 @@ public class NeedAssessment  extends Base {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private PurchaseType purchaseType; // GOODS, SERVICE, WORK
+    private PurchaseType purchaseType;
 
-    private UUID departmentId; // from department-service
-    private UUID storeId; // from store-service
+    private UUID departmentId;
+    private UUID storeId;
     private UUID budgetYearId;
 
 

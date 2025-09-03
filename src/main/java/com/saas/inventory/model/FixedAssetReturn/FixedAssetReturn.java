@@ -19,20 +19,20 @@ import java.util.UUID;
 
 public class FixedAssetReturn extends Base {
 
-    private UUID departmentId; //  to department issue
-    private UUID storeId; //  to store-service
+    private UUID departmentId;
+    private UUID storeId;
 
-    private UUID returnedById; //  to user/employee-service for the person returning the asset
+    private UUID returnedById;
 
     @Column(nullable = false, unique = true)
-    private String assetReturnNo; // Unique return number for tracking
+    private String assetReturnNo;
 
 
     @Column(nullable = false)
-    private String returnStatus; // Status of the return
+    private String returnStatus;
 
-    private LocalDate receivedDate; // Date when the asset was received
-    private LocalDate returnedDate; // Date when the asset was returned
+    private LocalDate receivedDate;
+    private LocalDate returnedDate;
 
 
 

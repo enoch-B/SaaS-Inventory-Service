@@ -15,7 +15,7 @@ import java.util.UUID;
 @Data
 public class FixedAssetTransfer extends Base {
 
-    private UUID departmentId; //  to department-service
+    private UUID departmentId;
 
 
     @Column(nullable = false)

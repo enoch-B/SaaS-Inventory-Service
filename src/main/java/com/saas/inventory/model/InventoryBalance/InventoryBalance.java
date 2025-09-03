@@ -26,7 +26,7 @@ public class InventoryBalance extends Base {
     private StoreType storeType;
 
 
-    // FK to Count Sheet
+
     @ManyToOne
     @JoinColumn(name = "inventory_count_id", nullable = false)
     private InventoryCount inventoryCount;

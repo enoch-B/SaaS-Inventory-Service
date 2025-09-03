@@ -27,11 +27,11 @@ public class InventoryCount extends Base {
     private String inventoryCountNumber;
 
     @Column(nullable = false)
-    private UUID storeId; // From store-service
+    private UUID storeId;
 
-    private UUID preparedById; // From employee-service
+    private UUID preparedById;
 
-    private UUID committeeId; // FK to committee-service
+    private UUID committeeId;
 
 
     @ElementCollection
@@ -41,10 +41,10 @@ public class InventoryCount extends Base {
 
 
     @Enumerated(EnumType.STRING)
-    private CountType countType;    // e.g., Periodic, Perpetual
+    private CountType countType;
 
     @Enumerated(EnumType.STRING)
-    private StoreType storeType; // e.g., Internal, Merchandise
+    private StoreType storeType;
 
     private UUID budgetYearId;
     private LocalDate countDate;
